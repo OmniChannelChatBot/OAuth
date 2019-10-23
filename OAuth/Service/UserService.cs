@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OAuth.Entity;
 using OAuth.Helper;
 using System;
 using System.Collections.Generic;
