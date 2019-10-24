@@ -1,0 +1,6 @@
+language: csharp
+dotnet: 3.0
+solution: DBApi.sln
+script:
+    - dotnet restore
+    - dotnet build
