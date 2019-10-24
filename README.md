@@ -1,5 +1,12 @@
 # OAuth
 
+| branch  |  link |
+|---|---|
+| master  |  [![Build Status](https://travis-ci.org/OmniChannelChatBot/OAuth.svg?branch=master)](https://travis-ci.org/OmniChannelChatBot/OAuth) |
+|  dev |   |
+
+
+
 # TODO:
 ## -add sentry.io
 ## -add docker
