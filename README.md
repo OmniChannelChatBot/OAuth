@@ -16,5 +16,8 @@
 |   |  link |
 |---|---|
 | jwt token  |  https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api  |
+| user management  |  https://jasonwatmore.com/post/2019/10/14/aspnet-core-3-simple-api-for-authentication-registration-and-user-management |
 |  token refresh |  https://fullstackmark.com/post/19/jwt-authentication-flow-with-refresh-tokens-in-aspnet-core-web-api |
+
+
 
