@@ -1,6 +1,6 @@
 language: csharp
 dotnet: 3.0
-solution: DBApi.sln
+solution: OAuth.sln
 script:
     - dotnet restore
     - dotnet build
