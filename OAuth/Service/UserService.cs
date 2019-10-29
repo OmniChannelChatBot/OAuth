@@ -3,12 +3,17 @@ using Microsoft.IdentityModel.Tokens;
 using OAuth.Entity;
 using OAuth.Exception;
 using OAuth.Helper;
+using OAuth.Model.DBApi;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OAuth.Service
 {
@@ -16,6 +21,7 @@ namespace OAuth.Service
     {
         User Authenticate(string username, string password);
         IEnumerable<User> GetAll();
+        Task<User> Create(User user, string password);
     }
 
     public class UserService : IUserService
@@ -27,10 +33,13 @@ namespace OAuth.Service
         };
 
         private readonly AppSettings _appSettings;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public UserService(IOptions<AppSettings> appSettings,
+        IHttpClientFactory httpClientFactory)
         {
             _appSettings = appSettings.Value;
+            _httpClientFactory = httpClientFactory;
         }
 
         public User Authenticate(string username, string password)
@@ -61,77 +70,101 @@ namespace OAuth.Service
             return user.WithoutPassword();
         }
 
-        //public User Create(User user, string password)
-        //{
-        //    // validation
-        //    if (string.IsNullOrWhiteSpace(password))
-        //    {
-        //        throw new OAuthException("Password is required");
-        //    }
+        public async Task<User> Create(User user, string password)
+        {
+            // validation
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new OAuthException("Password is required");
+            }
 
-        //    if (_context.Users.Any(x => x.Username == user.Username))
-        //    {
-        //        throw new OAuthException($"Username {user.Username} is already taken");
-        //    }
+            var registerUser = new DBApiRegisterModel()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Username = user.Username,
+                Password = user.Password,
+                Email = user.Email
+            };
 
-        //    byte[] passwordHash, passwordSalt;
-        //    CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.PostAsync("http://localhost:44335/api/user/create",
+                new StringContent(
+                    JsonSerializer.Serialize(registerUser), Encoding.UTF8, "application/json"));
 
-        //    user.PasswordHash = passwordHash;
-        //    user.PasswordSalt = passwordSalt;
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            var result = JsonSerializer.Deserialize<User>
+                (response.Content.ReadAsStringAsync().Result, options);
 
-        //    _context.Users.Add(user);
-        //    _context.SaveChanges();
+            //if (_context.Users.Any(x => x.Username == user.Username))
+            //{
+            //    throw new OAuthException($"Username {user.Username} is already taken");
+            //}
 
-        //    return user;
-        //}
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-        //public void Update(User userParam, string password = null)
-        //{
-        //    var user = _context.Users.Find(userParam.Id);
+            //user.PasswordHash = passwordHash;
+            //user.PasswordSalt = passwordSalt;
 
-        //    if (user == null)
-        //    {
-        //        throw new OAuthException("User not found");
-        //    }
+            //_context.Users.Add(user);
+            //_context.SaveChanges();
 
-        //    // update username if it has changed
-        //    if (!string.IsNullOrWhiteSpace(userParam.Username) && userParam.Username != user.Username)
-        //    {
-        //        // throw error if the new username is already taken
-        //        if (_context.Users.Any(x => x.Username == userParam.Username))
-        //        {
-        //            throw new OAuthException("Username " + userParam.Username + " is already taken");
-        //        }
+            await Task.Run(() => 5);
+            return user;
+        }
 
-        //        user.Username = userParam.Username;
-        //    }
+        public void Update(User userParam, string password = null)
+        {
+            //var user = _context.Users.Find(userParam.Id);
 
-        //    // update user properties if provided
-        //    if (!string.IsNullOrWhiteSpace(userParam.FirstName))
-        //        user.FirstName = userParam.FirstName;
+            //if (user == null)
+            //{
+            //    throw new OAuthException("User not found");
+            //}
 
-        //    if (!string.IsNullOrWhiteSpace(userParam.LastName))
-        //        user.LastName = userParam.LastName;
+            //// update username if it has changed
+            //if (!string.IsNullOrWhiteSpace(userParam.Username) && userParam.Username != user.Username)
+            //{
+            //    // throw error if the new username is already taken
+            //    if (_context.Users.Any(x => x.Username == userParam.Username))
+            //    {
+            //        throw new OAuthException("Username " + userParam.Username + " is already taken");
+            //    }
 
-        //    // update password if provided
-        //    if (!string.IsNullOrWhiteSpace(password))
-        //    {
-        //        byte[] passwordHash, passwordSalt;
-        //        CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            //    user.Username = userParam.Username;
+            //}
 
-        //        user.PasswordHash = passwordHash;
-        //        user.PasswordSalt = passwordSalt;
-        //    }
+            //// update user properties if provided
+            //if (!string.IsNullOrWhiteSpace(userParam.FirstName))
+            //    user.FirstName = userParam.FirstName;
 
-        //    _context.Users.Update(user);
-        //    _context.SaveChanges();
-        //}
+            //if (!string.IsNullOrWhiteSpace(userParam.LastName))
+            //    user.LastName = userParam.LastName;
 
-        //public User GetById(int id)
-        //{
-        //    return _context.Users.Find(id);
-        //}
+            //// update password if provided
+            //if (!string.IsNullOrWhiteSpace(password))
+            //{
+            //    byte[] passwordHash, passwordSalt;
+            //    CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            //    user.PasswordHash = passwordHash;
+            //    user.PasswordSalt = passwordSalt;
+            //}
+
+            //_context.Users.Update(user);
+            //_context.SaveChanges();
+        }
+
+        public User GetById(int id)
+        {
+            //return _context.Users.Find(id);
+
+            return new User();
+        }
 
         public IEnumerable<User> GetAll()
         {

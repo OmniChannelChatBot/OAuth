@@ -21,16 +21,16 @@ namespace OAuth.Controllers
     {
         private IUserService _userService;
         //private IMapper _mapper;
-        //private readonly AppSettings _appSettings;
+        private readonly AppSettings _appSettings;
 
         public UserController(
-            IUserService userService)
+            IUserService userService,
             //IMapper mapper,
-            //IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings)
         {
             _userService = userService;
             //_mapper = mapper;
-            //_appSettings = appSettings.Value;
+            _appSettings = appSettings.Value;
         }
 
         [AllowAnonymous]
@@ -55,25 +55,34 @@ namespace OAuth.Controllers
             });
         }
 
-        //[AllowAnonymous]
-        //[HttpPost("register")]
-        //public IActionResult Register([FromBody]RegisterModel model)
-        //{
-        //    // map model to entity
-        //    var user = _mapper.Map<User>(model);
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]RegisterModel model)
+        {
+            // map model to entity
+            //var user = _mapper.Map<User>(model);
 
-        //    try
-        //    {
-        //        // create user
-        //        _userService.Create(user, model.Password);
-        //        return Ok();
-        //    }
-        //    catch (OAuthException ex)
-        //    {
-        //        // return error message if there was an exception
-        //        return BadRequest(new { message = ex.Message });
-        //    }
-        //}
+            var user = new User()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Username = model.Username,
+                Password = model.Password
+            };
+
+            try
+            {
+                // create user
+                _userService.Create(user, model.Password);
+                return Ok();
+            }
+            catch (OAuthException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
         [HttpGet]
         public IActionResult GetAll()
