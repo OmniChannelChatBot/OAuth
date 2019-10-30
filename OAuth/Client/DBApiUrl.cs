@@ -12,6 +12,8 @@
 
         public static string CheckUser { get; private set; } = "checkuser";
 
+        public static string GetUser { get; private set; } = "getuser";
+
         public static string GetDBApiFullUrl (string baseUrl, string command)
         {
             return string.Concat(baseUrl, UserPrefix, command);

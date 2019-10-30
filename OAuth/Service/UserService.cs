@@ -20,25 +20,21 @@ namespace OAuth.Service
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
+        Task<User> AuthenticateAsync(string username, string password);
 
-        IEnumerable<User> GetAll();
+        //IEnumerable<User> GetAll();
 
         Task<User> CreateAsync(User user, string password);
 
         Task<bool> CheckUserAsync(string userName, string password);
 
         Task<bool> CheckUserNameAsync(string userName);
+
+        Task<User> GetUserAsync(string userName, string password);
     }
 
     public class UserService : IUserService
     {
-        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<User> _users = new List<User>
-        {
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
-        };
-
         private readonly AppSettings _appSettings;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly DBApiSettings _dbApiSettings;
@@ -52,15 +48,17 @@ namespace OAuth.Service
             _dbApiSettings = dbApiSettings.Value;
         }
 
-        public User Authenticate(string username, string password)
+        public async Task<User> AuthenticateAsync(string username, string password)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var exists = await CheckUserAsync(username, password);
 
             // return null if user not found
-            if (user == null)
+            if (exists == false)
             {
                 return null;
             }
+
+            var user = await GetUserAsync(username, password);
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -123,6 +121,29 @@ namespace OAuth.Service
             }
 
             return responseBool;
+        }
+
+        public async Task<User> GetUserAsync(string userName, string password)
+        {
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.GetUser);
+
+            User user;
+
+            var checkUserModel = new CheckUserModel()
+            {
+                UserName = userName,
+                Password = password
+            };
+
+            using (var client = _httpClientFactory.CreateClient())
+            {
+                var response = await client.PostAsync(DBApiUrl,
+                    JsonSerializerHelper.Serialize(checkUserModel));
+
+                user = JsonSerializerHelper.Deserialize<User>(response);
+            }
+
+            return user;
         }
 
         public async Task<User> CreateAsync(User user, string password)
@@ -217,10 +238,10 @@ namespace OAuth.Service
             return new User();
         }
 
-        public IEnumerable<User> GetAll()
-        {
-            return _users.WithoutPasswords();
-        }
+        //public IEnumerable<User> GetAll()
+        //{
+        //    return _users.WithoutPasswords();
+        //}
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

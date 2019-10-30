@@ -36,9 +36,9 @@ namespace OAuth.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        public async Task<IActionResult> Authenticate([FromBody]AuthenticateModel model)
         {
-            var user = _userService.Authenticate(model.Username, model.Password);
+            var user = await _userService.AuthenticateAsync(model.Username, model.Password);
 
             if (user == null)
             {
@@ -48,6 +48,7 @@ namespace OAuth.Controllers
             // return basic user info and authentication token
             return Ok(new UserModel
             {
+                Guid = user.Guid,
                 Id = user.Id,
                 Username = user.Username,
                 FirstName = user.FirstName,
@@ -65,14 +66,14 @@ namespace OAuth.Controllers
             return Ok(exists);
         }
 
-        [AllowAnonymous]
-        [HttpPost("checkuser")]
-        public async Task<IActionResult> CheckUserAsync([FromBody]CheckUserModel model)
-        {
-            var exists = await _userService.CheckUserAsync(model.UserName, model.Password);
+        //[AllowAnonymous]
+        //[HttpPost("checkuser")]
+        //public async Task<IActionResult> CheckUserAsync([FromBody]CheckUserModel model)
+        //{
+        //    var exists = await _userService.CheckUserAsync(model.UserName, model.Password);
 
-            return Ok(exists);
-        }
+        //    return Ok(exists);
+        //}
 
         [AllowAnonymous]
         [HttpPost("register")]
@@ -103,11 +104,11 @@ namespace OAuth.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            return Ok(users);
-        }
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    var users = _userService.GetAll();
+        //    return Ok(users);
+        //}
     }
 }
