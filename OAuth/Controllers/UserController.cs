@@ -10,6 +10,7 @@ using OAuth.Entity;
 using OAuth.Exception;
 using OAuth.Helper;
 using OAuth.Model;
+using OAuth.Model.DBApi;
 using OAuth.Service;
 
 namespace OAuth.Controllers
@@ -56,8 +57,17 @@ namespace OAuth.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("checkusername")]
+        public async Task<IActionResult> CheckUserName([FromBody]CheckUserModel model)
+        {
+            var exists = await _userService.CheckUserName(model.Username);
+
+            return Ok(exists);
+        }
+
+        [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]RegisterModel model)
+        public async Task<IActionResult> Register([FromBody]RegisterModel model)
         {
             // map model to entity
             //var user = _mapper.Map<User>(model);
@@ -74,8 +84,8 @@ namespace OAuth.Controllers
             try
             {
                 // create user
-                _userService.Create(user, model.Password);
-                return Ok();
+                var responseUser = await _userService.CreateAsync(user, model.Password);
+                return Ok(responseUser);
             }
             catch (OAuthException ex)
             {

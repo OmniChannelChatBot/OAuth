@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OAuth.Model.DBApi
 {
-    public class DBApiRegisterModel
+    public class RegisterUserModel
     {
         [Required]
         public string FirstName { get; set; }

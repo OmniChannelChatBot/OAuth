@@ -4,7 +4,9 @@
     {
         private static string UserPrefix { get; set; } = "user/";
 
-        public static string Create { get; set; } = "create";
+        public static string Create { get; private set; } = "create";
+
+        public static string CheckUserName { get; private set; } = "checkusername";
 
         public static string GetDBApiFullUrl (string baseUrl, string command)
         {

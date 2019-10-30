@@ -20,8 +20,12 @@ namespace OAuth.Service
     public interface IUserService
     {
         User Authenticate(string username, string password);
+
         IEnumerable<User> GetAll();
-        Task<User> Create(User user, string password);
+
+        Task<User> CreateAsync(User user, string password);
+
+        Task<bool> CheckUserName(string userName);
     }
 
     public class UserService : IUserService
@@ -73,7 +77,36 @@ namespace OAuth.Service
             return user.WithoutPassword();
         }
 
-        public async Task<User> Create(User user, string password)
+        public async Task<bool> CheckUserName(string userName)
+        {
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.CheckUserName);
+
+            bool responseBool;
+
+            var checkUserModel = new CheckUserModel()
+            {
+                Username = userName
+            };
+
+            using (var client = _httpClientFactory.CreateClient())
+            {
+                var response = await client.PostAsync(DBApiUrl,
+                    new StringContent(
+                        JsonSerializer.Serialize(checkUserModel), Encoding.UTF8, "application/json"));
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+                responseBool = JsonSerializer.Deserialize<bool>
+                    (response.Content.ReadAsStringAsync().Result, options);
+            }
+
+            return responseBool;
+        }
+
+        public async Task<User> CreateAsync(User user, string password)
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
@@ -81,7 +114,7 @@ namespace OAuth.Service
                 throw new OAuthException("Password is required");
             }
 
-            var registerUser = new DBApiRegisterModel()
+            var registerUser = new RegisterUserModel()
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
