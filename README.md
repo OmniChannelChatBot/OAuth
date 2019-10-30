@@ -11,6 +11,7 @@
 ## -add sentry.io
 ## -add docker
 ## -add opentracing, jaeger
+## -add polly
 
 # Links
 |   |  link |

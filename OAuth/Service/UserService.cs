@@ -4,6 +4,7 @@ using OAuth.Client;
 using OAuth.Entity;
 using OAuth.Exception;
 using OAuth.Helper;
+using OAuth.Model;
 using OAuth.Model.DBApi;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,9 @@ namespace OAuth.Service
 
         Task<User> CreateAsync(User user, string password);
 
-        Task<bool> CheckUserName(string userName);
+        Task<bool> CheckUserAsync(string userName, string password);
+
+        Task<bool> CheckUserNameAsync(string userName);
     }
 
     public class UserService : IUserService
@@ -77,30 +80,46 @@ namespace OAuth.Service
             return user.WithoutPassword();
         }
 
-        public async Task<bool> CheckUserName(string userName)
+        public async Task<bool> CheckUserNameAsync(string userName)
         {
             var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.CheckUserName);
 
             bool responseBool;
 
-            var checkUserModel = new CheckUserModel()
+            var checkUserNameModel = new CheckUserNameModel()
             {
-                Username = userName
+                UserName = userName
             };
 
             using (var client = _httpClientFactory.CreateClient())
             {
                 var response = await client.PostAsync(DBApiUrl,
-                    new StringContent(
-                        JsonSerializer.Serialize(checkUserModel), Encoding.UTF8, "application/json"));
+                    JsonSerializerHelper.Serialize(checkUserNameModel));
 
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                };
+                responseBool = JsonSerializerHelper.Deserialize<bool>(response);
+            }
 
-                responseBool = JsonSerializer.Deserialize<bool>
-                    (response.Content.ReadAsStringAsync().Result, options);
+            return responseBool;
+        }
+
+        public async Task<bool> CheckUserAsync(string userName, string password)
+        {
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.CheckUser);
+
+            bool responseBool;
+
+            var checkUserModel = new CheckUserModel()
+            {
+                UserName = userName,
+                Password = password
+            };
+
+            using (var client = _httpClientFactory.CreateClient())
+            {
+                var response = await client.PostAsync(DBApiUrl,
+                    JsonSerializerHelper.Serialize(checkUserModel));
+
+                responseBool = JsonSerializerHelper.Deserialize<bool>(response);
             }
 
             return responseBool;
@@ -130,16 +149,9 @@ namespace OAuth.Service
             using (var client = _httpClientFactory.CreateClient())
             {
                 var response = await client.PostAsync(DBApiUrl,
-                    new StringContent(
-                        JsonSerializer.Serialize(registerUser), Encoding.UTF8, "application/json"));
+                    JsonSerializerHelper.Serialize(registerUser));
 
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                };
-
-                deserializeUser = JsonSerializer.Deserialize<User>
-                    (response.Content.ReadAsStringAsync().Result, options);
+                deserializeUser = JsonSerializerHelper.Deserialize<User>(response);
             }
 
             //if (_context.Users.Any(x => x.Username == user.Username))

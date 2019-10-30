@@ -58,9 +58,18 @@ namespace OAuth.Controllers
 
         [AllowAnonymous]
         [HttpPost("checkusername")]
-        public async Task<IActionResult> CheckUserName([FromBody]CheckUserModel model)
+        public async Task<IActionResult> CheckUserNameAsync([FromBody]CheckUserNameModel model)
         {
-            var exists = await _userService.CheckUserName(model.Username);
+            var exists = await _userService.CheckUserNameAsync(model.UserName);
+
+            return Ok(exists);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("checkuser")]
+        public async Task<IActionResult> CheckUserAsync([FromBody]CheckUserModel model)
+        {
+            var exists = await _userService.CheckUserAsync(model.UserName, model.Password);
 
             return Ok(exists);
         }
