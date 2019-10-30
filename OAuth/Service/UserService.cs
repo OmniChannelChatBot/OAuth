@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OAuth.Client;
 using OAuth.Entity;
 using OAuth.Exception;
 using OAuth.Helper;
@@ -12,7 +13,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace OAuth.Service
@@ -34,12 +34,15 @@ namespace OAuth.Service
 
         private readonly AppSettings _appSettings;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly DBApiSettings _dbApiSettings;
 
         public UserService(IOptions<AppSettings> appSettings,
-        IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            IOptions<DBApiSettings> dbApiSettings)
         {
             _appSettings = appSettings.Value;
             _httpClientFactory = httpClientFactory;
+            _dbApiSettings = dbApiSettings.Value;
         }
 
         public User Authenticate(string username, string password)
@@ -87,17 +90,24 @@ namespace OAuth.Service
                 Email = user.Email
             };
 
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.PostAsync("http://localhost:44335/api/user/create",
-                new StringContent(
-                    JsonSerializer.Serialize(registerUser), Encoding.UTF8, "application/json"));
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.Create);
 
-            var options = new JsonSerializerOptions
+            User deserializeUser = null;
+
+            using (var client = _httpClientFactory.CreateClient())
             {
-                PropertyNameCaseInsensitive = true,
-            };
-            var result = JsonSerializer.Deserialize<User>
-                (response.Content.ReadAsStringAsync().Result, options);
+                var response = await client.PostAsync(DBApiUrl,
+                    new StringContent(
+                        JsonSerializer.Serialize(registerUser), Encoding.UTF8, "application/json"));
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+                deserializeUser = JsonSerializer.Deserialize<User>
+                    (response.Content.ReadAsStringAsync().Result, options);
+            }
 
             //if (_context.Users.Any(x => x.Username == user.Username))
             //{
@@ -110,11 +120,7 @@ namespace OAuth.Service
             //user.PasswordHash = passwordHash;
             //user.PasswordSalt = passwordSalt;
 
-            //_context.Users.Add(user);
-            //_context.SaveChanges();
-
-            await Task.Run(() => 5);
-            return user;
+            return deserializeUser;
         }
 
         public void Update(User userParam, string password = null)
