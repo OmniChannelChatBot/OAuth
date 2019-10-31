@@ -22,15 +22,15 @@ namespace OAuth.Service
     {
         Task<User> AuthenticateAsync(string username, string password);
 
-        //IEnumerable<User> GetAll();
-
-        Task<User> CreateAsync(User user, string password);
+        Task<User> CreateAsync(User user);
 
         Task<bool> CheckUserAsync(string userName, string password);
 
         Task<bool> CheckUserNameAsync(string userName);
 
         Task<User> GetUserAsync(string userName, string password);
+
+        Task<User> GetAsync(int id);
     }
 
     public class UserService : IUserService
@@ -146,13 +146,9 @@ namespace OAuth.Service
             return user;
         }
 
-        public async Task<User> CreateAsync(User user, string password)
+        public async Task<User> CreateAsync(User user)
         {
-            // validation
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new OAuthException("Password is required");
-            }
+            var temp = await Validate(user);
 
             var registerUser = new RegisterUserModel()
             {
@@ -175,18 +171,31 @@ namespace OAuth.Service
                 deserializeUser = JsonSerializerHelper.Deserialize<User>(response);
             }
 
-            //if (_context.Users.Any(x => x.Username == user.Username))
-            //{
-            //    throw new OAuthException($"Username {user.Username} is already taken");
-            //}
-
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            //byte[] passwordHash, passwordSalt;
+            //CreatePasswordHash(user.Password, out passwordHash, out passwordSalt);
 
             //user.PasswordHash = passwordHash;
             //user.PasswordSalt = passwordSalt;
 
             return deserializeUser;
+        }
+
+        private async Task<User> Validate(User user)
+        {
+            if (string.IsNullOrWhiteSpace(user.Password))
+            {
+                throw new OAuthException("Password is required");
+            }
+
+            // validate user in the end
+
+            var exists = await CheckUserNameAsync(user.Username);
+            if (exists)
+            {
+                throw new OAuthException($"Username {user.Username} is already taken");
+            }
+
+            return user;
         }
 
         public void Update(User userParam, string password = null)
@@ -231,17 +240,21 @@ namespace OAuth.Service
             //_context.SaveChanges();
         }
 
-        public User GetById(int id)
+        public async Task<User> GetAsync(int id)
         {
-            //return _context.Users.Find(id);
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, id.ToString());
 
-            return new User();
+            User deserializeUser = null;
+
+            using (var client = _httpClientFactory.CreateClient())
+            {
+                var response = await client.GetAsync(DBApiUrl);
+
+                deserializeUser = JsonSerializerHelper.Deserialize<User>(response);
+            }
+
+            return deserializeUser;
         }
-
-        //public IEnumerable<User> GetAll()
-        //{
-        //    return _users.WithoutPasswords();
-        //}
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +7,6 @@ using OAuth.Entity;
 using OAuth.Exception;
 using OAuth.Helper;
 using OAuth.Model;
-using OAuth.Model.DBApi;
 using OAuth.Service;
 
 namespace OAuth.Controllers
@@ -94,7 +90,7 @@ namespace OAuth.Controllers
             try
             {
                 // create user
-                var responseUser = await _userService.CreateAsync(user, model.Password);
+                var responseUser = await _userService.CreateAsync(user);
                 return Ok(responseUser);
             }
             catch (OAuthException ex)
@@ -104,11 +100,12 @@ namespace OAuth.Controllers
             }
         }
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var users = _userService.GetAll();
-        //    return Ok(users);
-        //}
+        //[AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var user = await _userService.GetAsync(id);
+            return Ok(user);
+        }
     }
 }
