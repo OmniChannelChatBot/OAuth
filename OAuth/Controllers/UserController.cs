@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OAuth.Entity;
 using OAuth.Exception;
-using OAuth.Helper;
 using OAuth.Model;
 using OAuth.Service;
+using OAuth.Settings;
 
 namespace OAuth.Controllers
 {

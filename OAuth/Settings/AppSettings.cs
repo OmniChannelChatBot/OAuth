@@ -1,4 +1,4 @@
-﻿namespace OAuth.Helper
+﻿namespace OAuth.Settings
 {
     public class AppSettings
     {

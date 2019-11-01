@@ -1,19 +1,16 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OAuth.Client;
 using OAuth.Entity;
 using OAuth.Exception;
 using OAuth.Helper;
 using OAuth.Model;
 using OAuth.Model.DBApi;
+using OAuth.Settings;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace OAuth.Service
