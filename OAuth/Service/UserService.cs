@@ -145,7 +145,7 @@ namespace OAuth.Service
 
         public async Task<User> CreateAsync(User user)
         {
-            var temp = await Validate(user);
+            await Validate(user);
 
             var registerUser = new RegisterUserModel()
             {
@@ -177,7 +177,7 @@ namespace OAuth.Service
             return deserializeUser;
         }
 
-        private async Task<User> Validate(User user)
+        private async Task Validate(User user)
         {
             if (string.IsNullOrWhiteSpace(user.Password))
             {
@@ -191,8 +191,6 @@ namespace OAuth.Service
             {
                 throw new OAuthException($"Username {user.Username} is already taken");
             }
-
-            return user;
         }
 
         public void Update(User userParam, string password = null)
