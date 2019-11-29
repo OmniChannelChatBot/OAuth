@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using OAuth.Extensions;
 using OAuth.Options;
 using OAuth.Services;
 using System.Text;
@@ -58,6 +58,8 @@ namespace OAuth
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+
+            services.AddCustomSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +74,8 @@ namespace OAuth
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCustomSwagger();
         }
     }
 }
