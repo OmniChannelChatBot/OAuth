@@ -1,10 +1,8 @@
 ﻿using OAuth.Entity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace OAuth.Helper
+namespace OAuth.Helpers
 {
     public static class ExtensionMethods
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OAuth.Entity;
-using OAuth.Exception;
-using OAuth.Helper;
-using OAuth.Model;
-using OAuth.Model.DBApi;
-using OAuth.Settings;
+using OAuth.Exceptions;
+using OAuth.Helpers;
+using OAuth.Models;
+using OAuth.Models.DBApi;
+using OAuth.Options;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
@@ -13,7 +13,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OAuth.Service
+namespace OAuth.Services
 {
     public interface IUserService
     {
@@ -32,13 +32,13 @@ namespace OAuth.Service
 
     public class UserService : IUserService
     {
-        private readonly AppSettings _appSettings;
+        private readonly AppOptions _appSettings;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly DBApiSettings _dbApiSettings;
+        private readonly DBApiOptions _dbApiSettings;
 
-        public UserService(IOptions<AppSettings> appSettings,
+        public UserService(IOptions<AppOptions> appSettings,
             IHttpClientFactory httpClientFactory,
-            IOptions<DBApiSettings> dbApiSettings)
+            IOptions<DBApiOptions> dbApiSettings)
         {
             _appSettings = appSettings.Value;
             _httpClientFactory = httpClientFactory;
@@ -59,7 +59,7 @@ namespace OAuth.Service
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.UTF8.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

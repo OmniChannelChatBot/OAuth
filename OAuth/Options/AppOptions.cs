@@ -1,6 +1,6 @@
-﻿namespace OAuth.Settings
+﻿namespace OAuth.Options
 {
-    public class AppSettings
+    public class AppOptions
     {
         public string Secret { get; set; }
     }

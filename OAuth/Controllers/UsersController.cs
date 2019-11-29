@@ -1,33 +1,22 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using OAuth.Entity;
-using OAuth.Exception;
-using OAuth.Model;
-using OAuth.Service;
-using OAuth.Settings;
+using OAuth.Exceptions;
+using OAuth.Models;
+using OAuth.Services;
+using System.Threading.Tasks;
 
 namespace OAuth.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class UserController : ControllerBase
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
     {
-        private IUserService _userService;
-        //private IMapper _mapper;
-        private readonly AppSettings _appSettings;
+        private readonly IUserService _userService;
 
-        public UserController(
-            IUserService userService,
-            //IMapper mapper,
-            IOptions<AppSettings> appSettings)
-        {
+        public UsersController(IUserService userService) =>
             _userService = userService;
-            //_mapper = mapper;
-            _appSettings = appSettings.Value;
-        }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -61,15 +50,6 @@ namespace OAuth.Controllers
             return Ok(exists);
         }
 
-        //[AllowAnonymous]
-        //[HttpPost("checkuser")]
-        //public async Task<IActionResult> CheckUserAsync([FromBody]CheckUserModel model)
-        //{
-        //    var exists = await _userService.CheckUserAsync(model.UserName, model.Password);
-
-        //    return Ok(exists);
-        //}
-
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegisterModel model)
@@ -99,8 +79,7 @@ namespace OAuth.Controllers
             }
         }
 
-        //[AllowAnonymous]
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetAsync(int id)
         {
             var user = await _userService.GetAsync(id);

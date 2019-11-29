@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OAuth.Model
+namespace OAuth.Models
 {
-    public class CheckUserModel
+    public class CheckUserNameModel
     {
         [Required]
         public string UserName { get; set; }
-
-        [Required]
-        public string Password { get; set; }
     }
 }
