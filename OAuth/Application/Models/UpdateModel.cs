@@ -1,4 +1,4 @@
-﻿namespace OAuth.Models
+﻿namespace OAuth.Application.Models
 {
     public class UpdateModel
     {

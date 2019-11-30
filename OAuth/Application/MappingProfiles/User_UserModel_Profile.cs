@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using OAuth.Entity;
-using OAuth.Models;
+using OAuth.Application.Entity;
+using OAuth.Application.Models;
 
-namespace OAuth.MappingProfiles
+namespace OAuth.Application.MappingProfiles
 {
     public class User_UserModel_Profile : Profile
     {

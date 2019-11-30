@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OAuth.Entity;
-using OAuth.Models;
-using OAuth.Services;
+using OAuth.Application.Entity;
+using OAuth.Application.Models;
+using OAuth.Application.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -48,20 +48,11 @@ namespace OAuth.Controllers
         [AllowAnonymous]
         [HttpPost]
         [SwaggerOperation(OperationId = nameof(Create))]
-        [SwaggerResponse(StatusCodes.Status200OK, "Created", typeof(CreateModel))]
-        public async Task<IActionResult> Create([FromBody, BindRequired]CreateModel model)
+        [SwaggerResponse(StatusCodes.Status200OK, "Created")]
+        public async Task<IActionResult> Create([FromBody, BindRequired]CreateUserModel model)
         {
-            var responseUser = await _userService.CreateAsync(_mapper.Map<User>(model));
-            return Ok(responseUser);
-        }
-
-        [HttpGet("{id:int}")]
-        [SwaggerOperation(OperationId = nameof(GetByIdAsync))]
-        [SwaggerResponse(StatusCodes.Status200OK, "Users received", typeof(User))]
-        public async Task<IActionResult> GetByIdAsync(int id)
-        {
-            var user = await _userService.GetAsync(id);
-            return Ok(user);
+            await _userService.CreateAsync(_mapper.Map<User>(model));
+            return Ok();
         }
 
         //[AllowAnonymous]
@@ -74,5 +65,14 @@ namespace OAuth.Controllers
 
         //    return Ok(exists);
         //}
+
+        [HttpGet("{Id:int}")]
+        [SwaggerOperation(OperationId = nameof(GetById))]
+        [SwaggerResponse(StatusCodes.Status200OK, "User received", typeof(User))]
+        public async Task<IActionResult> GetById([FromRoute]GetUserModel model)
+        {
+            var user = await _userService.GetAsync(model.Id);
+            return Ok(user);
+        }
     }
 }

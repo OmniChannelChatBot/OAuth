@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OAuth.Models
+namespace OAuth.Application.Models
 {
     public class CheckUserNameModel
     {

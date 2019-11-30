@@ -1,4 +1,4 @@
-﻿namespace OAuth.Options
+﻿namespace OAuth.Application.Options
 {
     public class AppOptions
     {

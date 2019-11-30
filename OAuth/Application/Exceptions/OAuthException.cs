@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Globalization;
 
-namespace OAuth.Exceptions
+namespace OAuth.Application.Exceptions
 {
-    // Custom exception class for throwing application specific exceptions (e.g. for validation) 
-    // that can be caught and handled within the application
     public class OAuthException : Exception
     {
         public OAuthException()

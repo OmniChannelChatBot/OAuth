@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OAuth.Application.Options;
 using OAuth.Extensions;
-using OAuth.Options;
 
 namespace OAuth
 {
@@ -20,7 +20,7 @@ namespace OAuth
             services.Configure<DBApiOptions>(options =>
             {
                 options.Url
-                    = Configuration.GetSection(nameof(AppOptions)).Value;
+                    = Configuration.GetSection(nameof(DBApiOptions)).Value;
             });
 
             services.AddHealthChecks();

@@ -1,7 +1,7 @@
-﻿using OAuth.Entity;
+﻿using OAuth.Application.Entity;
 using System.Threading.Tasks;
 
-namespace OAuth.Services
+namespace OAuth.Application.Services
 {
     public interface IUserService
     {

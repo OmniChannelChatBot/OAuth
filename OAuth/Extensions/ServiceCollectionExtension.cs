@@ -1,11 +1,13 @@
-﻿using FluentValidation.AspNetCore;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OAuth.Application.Options;
+using OAuth.Application.Services;
+using OAuth.Application.Validators;
 using OAuth.Controllers.Filters;
-using OAuth.Options;
-using OAuth.Services;
 using System;
 using System.Text;
 
@@ -14,6 +16,7 @@ namespace OAuth.Extensions
     internal static class ServiceCollectionExtension
     {
         public static void AddApplication(this IServiceCollection services) => services
+            .AddFluentValidators()
             .AddScoped<IUserService, UserService>();
 
         public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<AppOptions> options)
@@ -56,6 +59,18 @@ namespace OAuth.Extensions
                     options.SuppressMapClientErrors = true;
                 })
                 .AddFluentValidation();
+
+        private static IServiceCollection AddFluentValidators(this IServiceCollection services) => services
+            .Scan(scan =>
+            {
+                scan
+                    .FromAssemblies(typeof(Startup).Assembly)
+                    .AddClasses(classes => classes
+                        .InNamespaces(typeof(GetUserModelValidator).Namespace)
+                        .AssignableTo(typeof(IValidator<>)))
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime();
+            });
 
         private static IServiceCollection AddMvcActionFilters(this IServiceCollection services) => services
             .AddScoped<ApiActionFilter>();

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OAuth.Entity;
-using OAuth.Exceptions;
-using OAuth.Helpers;
-using OAuth.Models;
+using OAuth.Application.Entity;
+using OAuth.Application.Exceptions;
+using OAuth.Application.Helpers;
+using OAuth.Application.Models;
+using OAuth.Application.Options;
 using OAuth.Models.DBApi;
-using OAuth.Options;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
@@ -13,7 +13,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OAuth.Services
+namespace OAuth.Application.Services
 {
     public class UserService : IUserService
     {
@@ -66,7 +66,7 @@ namespace OAuth.Services
 
             bool responseBool;
 
-            var checkUserNameModel = new CheckUserNameModel()
+            var checkUserNameModel = new CheckUserNameModel
             {
                 UserName = userName
             };

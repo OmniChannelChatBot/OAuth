@@ -1,14 +1,16 @@
 ﻿using System;
 
-namespace OAuth.Models
+namespace OAuth.Application.Entity
 {
-    public class UserModel
+    public class User
     {
         public Guid Guid { get; set; }
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
         public string Token { get; set; }
     }
 }

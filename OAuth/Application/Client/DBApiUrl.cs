@@ -1,4 +1,4 @@
-﻿namespace OAuth.Client
+﻿namespace OAuth.Application.Client
 {
     public static class DBApiUrl
     {

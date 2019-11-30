@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 
-namespace OAuth.Helpers
+namespace OAuth.Application.Helpers
 {
     public static class JsonSerializerHelper
     {

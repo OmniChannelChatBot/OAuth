@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OAuth.Models
+namespace OAuth.Application.Models
 {
-    public class CreateModel
+    public class CreateUserModel
     {
         [Required]
         public string FirstName { get; set; }
