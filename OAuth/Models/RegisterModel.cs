@@ -2,7 +2,7 @@
 
 namespace OAuth.Models
 {
-    public class RegisterModel
+    public class CreateModel
     {
         [Required]
         public string FirstName { get; set; }

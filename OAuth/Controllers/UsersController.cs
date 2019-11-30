@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OAuth.Entity;
-using OAuth.Exceptions;
 using OAuth.Models;
 using OAuth.Services;
 using Swashbuckle.AspNetCore.Annotations;
@@ -20,9 +20,13 @@ namespace OAuth.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService) =>
+        public UsersController(IUserService userService, IMapper mapper)
+        {
             _userService = userService;
+            _mapper = mapper;
+        }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -37,66 +41,38 @@ namespace OAuth.Controllers
                 return NotFound("Username or password is incorrect");
             }
 
-            return Ok(new UserModel
-            {
-                Guid = user.Guid,
-                Id = user.Id,
-                Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Token = user.Token
-            });
+
+            return Ok(_mapper.Map<UserModel>(user));
         }
 
         [AllowAnonymous]
-        [HttpPost("register")]
-        [SwaggerOperation(OperationId = nameof(Register))]
-        [SwaggerResponse(StatusCodes.Status200OK, "Registered", typeof(RegisterModel))]
-        public async Task<IActionResult> Register([FromBody, BindRequired]RegisterModel model)
+        [HttpPost]
+        [SwaggerOperation(OperationId = nameof(Create))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Created", typeof(CreateModel))]
+        public async Task<IActionResult> Create([FromBody, BindRequired]CreateModel model)
         {
-            // map model to entity
-            //var user = _mapper.Map<User>(model);
-
-            var user = new User()
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                Username = model.Username,
-                Password = model.Password
-            };
-
-            try
-            {
-                // create user
-                var responseUser = await _userService.CreateAsync(user);
-                return Ok(responseUser);
-            }
-            catch (OAuthException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost("checkusername")]
-        [SwaggerOperation(OperationId = nameof(CheckUserNameAsync))]
-        [SwaggerResponse(StatusCodes.Status200OK, "User name checked", typeof(bool))]
-        public async Task<IActionResult> CheckUserNameAsync([FromBody]CheckUserNameModel model)
-        {
-            var exists = await _userService.CheckUserNameAsync(model.UserName);
-
-            return Ok(exists);
+            var responseUser = await _userService.CreateAsync(_mapper.Map<User>(model));
+            return Ok(responseUser);
         }
 
         [HttpGet("{id:int}")]
-        [SwaggerOperation(OperationId = nameof(GetAsync))]
+        [SwaggerOperation(OperationId = nameof(GetByIdAsync))]
         [SwaggerResponse(StatusCodes.Status200OK, "Users received", typeof(User))]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var user = await _userService.GetAsync(id);
             return Ok(user);
         }
+
+        //[AllowAnonymous]
+        //[HttpPost("checkusername")]
+        //[SwaggerOperation(OperationId = nameof(CheckUserNameAsync))]
+        //[SwaggerResponse(StatusCodes.Status200OK, "User name checked", typeof(bool))]
+        //public async Task<IActionResult> CheckUserNameAsync([FromBody]CheckUserNameModel model)
+        //{
+        //    var exists = await _userService.CheckUserNameAsync(model.UserName);
+
+        //    return Ok(exists);
+        //}
     }
 }
