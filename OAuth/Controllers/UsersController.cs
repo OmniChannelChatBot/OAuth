@@ -1,16 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OAuth.Entity;
 using OAuth.Exceptions;
 using OAuth.Models;
 using OAuth.Services;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace OAuth.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/users")]
+    [Route("api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -20,7 +26,9 @@ namespace OAuth.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody]AuthenticateModel model)
+        [SwaggerOperation(OperationId = nameof(Authenticate))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Authenticated", typeof(UserModel))]
+        public async Task<IActionResult> Authenticate([FromBody, BindRequired]AuthenticateModel model)
         {
             var user = await _userService.AuthenticateAsync(model.Username, model.Password);
 
@@ -42,17 +50,10 @@ namespace OAuth.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("checkusername")]
-        public async Task<IActionResult> CheckUserNameAsync([FromBody]CheckUserNameModel model)
-        {
-            var exists = await _userService.CheckUserNameAsync(model.UserName);
-
-            return Ok(exists);
-        }
-
-        [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]RegisterModel model)
+        [SwaggerOperation(OperationId = nameof(Register))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Registered", typeof(RegisterModel))]
+        public async Task<IActionResult> Register([FromBody, BindRequired]RegisterModel model)
         {
             // map model to entity
             //var user = _mapper.Map<User>(model);
@@ -79,7 +80,20 @@ namespace OAuth.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost("checkusername")]
+        [SwaggerOperation(OperationId = nameof(CheckUserNameAsync))]
+        [SwaggerResponse(StatusCodes.Status200OK, "User name checked", typeof(bool))]
+        public async Task<IActionResult> CheckUserNameAsync([FromBody]CheckUserNameModel model)
+        {
+            var exists = await _userService.CheckUserNameAsync(model.UserName);
+
+            return Ok(exists);
+        }
+
         [HttpGet("{id:int}")]
+        [SwaggerOperation(OperationId = nameof(GetAsync))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Users received", typeof(User))]
         public async Task<IActionResult> GetAsync(int id)
         {
             var user = await _userService.GetAsync(id);

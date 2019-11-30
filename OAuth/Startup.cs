@@ -18,11 +18,10 @@ namespace OAuth
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
+            services.AddHealthChecks();
+            services.AddApi();
             services.AddHttpClient();
 
             // configure strongly typed settings objects
@@ -42,6 +41,7 @@ namespace OAuth
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
             {
@@ -56,13 +56,11 @@ namespace OAuth
                 };
             });
 
-            // configure DI for application services
             services.AddScoped<IUserService, UserService>();
 
             services.AddCustomSwagger();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
@@ -72,6 +70,7 @@ namespace OAuth
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapControllers();
             });
 

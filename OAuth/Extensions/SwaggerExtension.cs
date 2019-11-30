@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using OAuth.Models;
 using OAuth.Swagger.OperationFilters;
 
 namespace OAuth.Extensions
@@ -31,6 +32,9 @@ namespace OAuth.Extensions
                  });
 
                  c.OperationFilter<OperationSecurityDefinitionFilter>(Scheme);
+                 c.OperationFilter<OperationApiProblemDetailsFilter>(
+                        new int[] { 504, 503, 502, 501, 500, 415, 413, 412, 405, 400 },
+                        typeof(ApiProblemDetails));
 
                  c.EnableAnnotations();
              });
