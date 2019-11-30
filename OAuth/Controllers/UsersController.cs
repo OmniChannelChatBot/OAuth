@@ -32,12 +32,11 @@ namespace OAuth.Controllers
         {
             var user = await _userService.AuthenticateAsync(model.Username, model.Password);
 
-            if (user == null)
+            if (user == default(User))
             {
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return NotFound("Username or password is incorrect");
             }
 
-            // return basic user info and authentication token
             return Ok(new UserModel
             {
                 Guid = user.Guid,

@@ -4,7 +4,7 @@ using OAuth.Controllers.Filters;
 
 namespace OAuth.Extensions
 {
-    public static class ServiceCollectionExtension
+    internal static class ServiceCollectionExtension
     {
         public static IMvcBuilder AddApi(this IServiceCollection services) => services
             .AddMvcActionFilters()

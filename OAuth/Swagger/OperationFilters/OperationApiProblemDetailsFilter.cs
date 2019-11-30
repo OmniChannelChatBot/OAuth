@@ -6,7 +6,7 @@ using System.Net.Mime;
 
 namespace OAuth.Swagger.OperationFilters
 {
-    public class OperationApiProblemDetailsFilter : IOperationFilter
+    internal class OperationApiProblemDetailsFilter : IOperationFilter
     {
         private readonly int[] _statusCodes;
         private readonly Type _schema;

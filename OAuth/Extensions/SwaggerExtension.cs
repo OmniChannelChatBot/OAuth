@@ -6,7 +6,7 @@ using OAuth.Swagger.OperationFilters;
 
 namespace OAuth.Extensions
 {
-    public static class SwaggerExtension
+    internal static class SwaggerExtension
     {
         private const string RoutePrefix = "api-doc";
         private const string DefaultVersion = "v1";

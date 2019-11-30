@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OAuth.Swagger.OperationFilters
 {
-    public class OperationSecurityDefinitionFilter : IOperationFilter
+    internal class OperationSecurityDefinitionFilter : IOperationFilter
     {
         private readonly string _openApiReferenceId;
 
