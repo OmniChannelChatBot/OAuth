@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mime;
 
-namespace OAuth.Swagger.OperationFilters
+namespace OAuth.Api.Swagger.OperationFilters
 {
     internal class OperationApiProblemDetailsFilter : IOperationFilter
     {
@@ -35,7 +35,7 @@ namespace OAuth.Swagger.OperationFilters
                     statusCode.ToString(),
                     new OpenApiResponse
                     {
-                        Description = Const.ProblemTypes[statusCode].Item1,
+                        Description = Constants.ProblemTypes[statusCode].Item1,
                         Content = new Dictionary<string, OpenApiMediaType>
                         {
                         {

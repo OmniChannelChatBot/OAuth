@@ -4,22 +4,24 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OAuth.Application.Options;
-using OAuth.Application.Services;
-using OAuth.Application.Validators;
-using OAuth.Controllers.Filters;
+using OAuth.Api.Application.Validators;
+using OAuth.Api.Controllers.Filters;
+using OAuth.Core.Interfaces;
+using OAuth.Core.Options;
+using OAuth.Core.Services;
 using System;
 using System.Text;
 
-namespace OAuth.Extensions
+namespace OAuth.Api.Extensions
 {
     internal static class ServiceCollectionExtension
     {
-        public static void AddApplication(this IServiceCollection services) => services
+        public static void AddApplicationServices(this IServiceCollection services) => services
             .AddFluentValidators()
-            .AddScoped<IUserService, UserService>();
+            .AddScoped<IUserService, UserService>()
+            .AddScoped<ISecurityTokenService, SecurityTokenService>();
 
-        public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<AppOptions> options)
+        public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<SecurityTokenOptions> options)
         {
             services.Configure(options);
 
@@ -31,10 +33,10 @@ namespace OAuth.Extensions
             })
             .AddJwtBearer(x =>
             {
-                var appOptions = services
+                var securityTokenOptions = services
                     .BuildServiceProvider()
-                    .GetRequiredService<IOptions<AppOptions>>();
-                var key = Encoding.UTF8.GetBytes(appOptions.Value.Secret);
+                    .GetRequiredService<IOptions<SecurityTokenOptions>>();
+                var key = Encoding.UTF8.GetBytes(securityTokenOptions.Value.Secret);
 
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
@@ -42,14 +44,20 @@ namespace OAuth.Extensions
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+
+                    ValidateIssuer = true,
+                    ValidIssuer = securityTokenOptions.Value.Issuer,
+                    ValidateAudience = true,
+                    ValidAudience = securityTokenOptions.Value.Audience,
+                    ValidateLifetime = true,
+
+                    ClockSkew = TimeSpan.FromSeconds(5)
                 };
             });
 
             return services;
         }
-        public static IMvcBuilder AddApi(this IServiceCollection services) => services
+        public static IMvcBuilder AddApiServices(this IServiceCollection services) => services
             .AddMvcActionFilters()
             .AddControllers(o => o.Filters.AddService<ApiActionFilter>())
                 .AddJsonOptions(o => o.JsonSerializerOptions.IgnoreNullValues = true)

@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OAuth.Application.Entity;
-using OAuth.Application.Models;
-using OAuth.Application.Services;
+using OAuth.Api.Application.Entity;
+using OAuth.Api.Application.Models;
+using OAuth.Api.Application.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
-namespace OAuth.Controllers
+namespace OAuth.Api.Controllers
 {
     [Authorize]
     [ApiController]
@@ -26,23 +26,6 @@ namespace OAuth.Controllers
         {
             _userService = userService;
             _mapper = mapper;
-        }
-
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
-        [SwaggerOperation(OperationId = nameof(Authenticate))]
-        [SwaggerResponse(StatusCodes.Status200OK, "Authenticated", typeof(UserModel))]
-        public async Task<IActionResult> Authenticate([FromBody, BindRequired]AuthenticateModel model)
-        {
-            var user = await _userService.AuthenticateAsync(model.Username, model.Password);
-
-            if (user == default(User))
-            {
-                return NotFound("Username or password is incorrect");
-            }
-
-
-            return Ok(_mapper.Map<UserModel>(user));
         }
 
         [AllowAnonymous]

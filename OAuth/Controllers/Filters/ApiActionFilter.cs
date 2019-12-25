@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using OAuth.Models;
+using OAuth.Api.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OAuth.Controllers.Filters
+namespace OAuth.Api.Controllers.Filters
 {
     internal class ApiActionFilter : IAsyncActionFilter
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OAuth.Application.Models
+namespace OAuth.Api.Application.Models
 {
     public class AuthenticateModel
     {

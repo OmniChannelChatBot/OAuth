@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using OAuth.Application.Models;
+using OAuth.Api.Application.Models;
 
-namespace OAuth.Application.Validators
+namespace OAuth.Api.Application.Validators
 {
     public class GetUserModelValidator: AbstractValidator<GetUserModel>
     {

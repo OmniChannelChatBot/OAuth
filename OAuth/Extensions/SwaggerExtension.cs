@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using OAuth.Models;
-using OAuth.Swagger.OperationFilters;
+using OAuth.Api.Models;
+using OAuth.Api.Swagger.OperationFilters;
 
-namespace OAuth.Extensions
+namespace OAuth.Api.Extensions
 {
     internal static class SwaggerExtension
     {

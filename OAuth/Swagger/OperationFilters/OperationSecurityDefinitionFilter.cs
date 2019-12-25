@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OAuth.Swagger.OperationFilters
+namespace OAuth.Api.Swagger.OperationFilters
 {
     internal class OperationSecurityDefinitionFilter : IOperationFilter
     {

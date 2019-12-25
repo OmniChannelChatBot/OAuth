@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OAuth.Models
+namespace OAuth.Api.Models
 {
     /// <summary>
     /// https://tools.ietf.org/html/rfc7231
@@ -39,12 +39,12 @@ namespace OAuth.Models
 
         public ApiProblemDetails(HttpContext context, string title = default(string))
         {
-            if (Const.ProblemTypes.TryGetValue(context.Response.StatusCode, out var problemType))
+            if (Constants.ProblemTypes.TryGetValue(context.Response.StatusCode, out var problemType))
             {
                 Type = problemType.Item2;
             }
 
-            Title = title ?? Const.ProblemTypes[context.Response.StatusCode].Item1;
+            Title = title ?? Constants.ProblemTypes[context.Response.StatusCode].Item1;
             TraceId = context.TraceIdentifier;
             Status = context.Response.StatusCode;
             Instance = nameof(OAuth);

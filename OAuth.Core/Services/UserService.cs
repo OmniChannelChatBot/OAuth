@@ -1,68 +1,44 @@
 ﻿using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using OAuth.Application.Entity;
-using OAuth.Application.Exceptions;
-using OAuth.Application.Helpers;
-using OAuth.Application.Models;
-using OAuth.Application.Options;
-using OAuth.Models.DBApi;
+using OAuth.Core.Interfaces;
+using OAuth.Core.Options;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OAuth.Application.Services
+namespace OAuth.Core.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppOptions _appSettings;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly DBApiOptions _dbApiSettings;
+        private readonly DBApiOptions _dbApiOptions;
 
-        public UserService(IOptions<AppOptions> appSettings,
+        public UserService(
             IHttpClientFactory httpClientFactory,
             IOptions<DBApiOptions> dbApiSettings)
         {
-            _appSettings = appSettings.Value;
             _httpClientFactory = httpClientFactory;
-            _dbApiSettings = dbApiSettings.Value;
+            _dbApiOptions = dbApiSettings.Value;
         }
 
         public async Task<User> AuthenticateAsync(string username, string password)
         {
             var exists = await CheckUserAsync(username, password);
 
-            // return null if user not found
-            if (exists == false)
+            if (!exists)
             {
                 return null;
             }
 
             var user = await GetUserAsync(username, password);
 
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+            user.Token = string.Empty;
 
             return user.WithoutPassword();
         }
 
         public async Task<bool> CheckUserNameAsync(string userName)
         {
-            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.CheckUserName);
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiOptions.Url, Client.DBApiUrl.CheckUserName);
 
             bool responseBool;
 
@@ -84,7 +60,9 @@ namespace OAuth.Application.Services
 
         public async Task<bool> CheckUserAsync(string userName, string password)
         {
-            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.CheckUser);
+            return true;
+
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiOptions.Url, Client.DBApiUrl.CheckUser);
 
             bool responseBool;
 
@@ -107,7 +85,19 @@ namespace OAuth.Application.Services
 
         public async Task<User> GetUserAsync(string userName, string password)
         {
-            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.GetUser);
+            return await Task.FromResult<User>(new User
+            {
+                Guid = Guid.NewGuid(),
+                Id = 1273126,
+                FirstName = "test first name",
+                LastName = "test last name",
+                Username = "ZEXSM",
+                Password = null,
+                Email = null,
+                Token = null
+            });
+
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiOptions.Url, Client.DBApiUrl.GetUser);
 
             User user;
 
@@ -141,7 +131,7 @@ namespace OAuth.Application.Services
                 Email = user.Email
             };
 
-            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, Client.DBApiUrl.Create);
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiOptions.Url, Client.DBApiUrl.Create);
 
             User deserializeUser = null;
 
@@ -222,7 +212,7 @@ namespace OAuth.Application.Services
 
         public async Task<User> GetAsync(int id)
         {
-            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiSettings.Url, id.ToString());
+            var DBApiUrl = Client.DBApiUrl.GetDBApiFullUrl(_dbApiOptions.Url, id.ToString());
 
             User deserializeUser = null;
 

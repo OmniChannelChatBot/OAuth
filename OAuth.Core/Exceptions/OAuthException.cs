@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace OAuth.Application.Exceptions
+namespace OAuth.Core.Exceptions
 {
     public class OAuthException : Exception
     {
