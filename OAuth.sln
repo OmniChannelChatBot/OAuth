@@ -11,9 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth.Core", "OAuth.Core\OAuth.Core.csproj", "{F57FE478-71D7-4B68-AF71-C6B31B128C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuth.Core", "OAuth.Core\OAuth.Core.csproj", "{F57FE478-71D7-4B68-AF71-C6B31B128C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth.Infrastructure", "OAuth.Infrastructure\OAuth.Infrastructure.csproj", "{507FC43D-9DC7-45F4-B198-74E65EF45068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuth.Infrastructure", "OAuth.Infrastructure\OAuth.Infrastructure.csproj", "{507FC43D-9DC7-45F4-B198-74E65EF45068}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nswag", "nswag", "{B96AF2A3-C5CD-4829-B23C-B8137F342D7C}"
+	ProjectSection(SolutionItems) = preProject
+		nswag\db-api-schema.nswag = nswag\db-api-schema.nswag
+		nswag\nswag-run.bat = nswag\nswag-run.bat
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +42,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B96AF2A3-C5CD-4829-B23C-B8137F342D7C} = {D6FEA5B7-35FA-47A9-A134-4915CF8AADD9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA01B1FE-2F00-4E2A-94FD-E05F2D252C47}
