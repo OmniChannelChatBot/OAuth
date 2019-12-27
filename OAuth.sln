@@ -21,6 +21,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nswag", "nswag", "{B96AF2A3
 		nswag\nswag-run.bat = nswag\nswag-run.bat
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "overrade-templates", "overrade-templates", "{8EA6214E-8CB7-4E79-938E-E0C8A0ADA159}"
+	ProjectSection(SolutionItems) = preProject
+		nswag\overrade-templates\Client.Class.liquid = nswag\overrade-templates\Client.Class.liquid
+		nswag\overrade-templates\Client.Class.ProcessResponse.liquid = nswag\overrade-templates\Client.Class.ProcessResponse.liquid
+		nswag\overrade-templates\Client.Class.QueryParameter.liquid = nswag\overrade-templates\Client.Class.QueryParameter.liquid
+		nswag\overrade-templates\Client.Class.ReadObjectResponse.liquid = nswag\overrade-templates\Client.Class.ReadObjectResponse.liquid
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +53,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B96AF2A3-C5CD-4829-B23C-B8137F342D7C} = {D6FEA5B7-35FA-47A9-A134-4915CF8AADD9}
+		{8EA6214E-8CB7-4E79-938E-E0C8A0ADA159} = {B96AF2A3-C5CD-4829-B23C-B8137F342D7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA01B1FE-2F00-4E2A-94FD-E05F2D252C47}

@@ -27,7 +27,7 @@
       "generateBaseUrlProperty": false,
       "generateSyncMethods": false,
       "exposeJsonSerializerSettings": false,
-      "clientClassAccessModifier": "public",
+      "clientClassAccessModifier": "internal",
       "typeAccessModifier": "public",
       "generateContractsOutput": false,
       "contractsNamespace": null,
@@ -41,10 +41,11 @@
       "operationGenerationMode": "SingleClientFromOperationId",
       "additionalNamespaceUsages": [
         "Microsoft.Extensions.Options",
-        "OAuth.Core.Options"
+        "OAuth.Core.Options",
+        "OAuth.Core.Exceptions"
       ],
       "additionalContractNamespaceUsages": [],
-      "generateOptionalParameters": false,
+      "generateOptionalParameters": true,
       "generateJsonMethods": false,
       "enforceFlagEnums": false,
       "parameterArrayType": "System.Collections.Generic.IEnumerable",
@@ -72,7 +73,9 @@
       "classStyle": "Poco",
       "generateDefaultValues": true,
       "generateDataAnnotations": true,
-      "excludedTypeNames": [],
+      "excludedTypeNames": [
+        "ApiException"
+      ],
       "excludedParameterNames": [],
       "handleReferences": false,
       "generateImmutableArrayProperties": true,
@@ -84,7 +87,7 @@
       "inlineNamedAny": false,
       "generateDtoTypes": true,
       "generateOptionalPropertiesAsNullable": false,
-      "templateDirectory": null,
+      "templateDirectory": "overrade-templates",
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,

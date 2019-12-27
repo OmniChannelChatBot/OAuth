@@ -6,6 +6,7 @@
 
 using Microsoft.Extensions.Options;
 using OAuth.Core.Options;
+using OAuth.Core.Exceptions;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
@@ -20,155 +21,94 @@ namespace OAuth.Infrastructure.Services
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.2.0.0 (NJsonSchema v10.1.2.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial interface IDbApiServiceClient
     {
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync();
-    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync(System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body);
+        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid);
+        System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync(System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body);
+        System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id);
+        System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body);
+        System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token);
+        System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateUserAsync(CreateUserCommand body);
+        System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateUserAsync(CreateUserCommand body, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Updated</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body);
+        System.Threading.Tasks.Task<int> CreateUserAsync(CreateUserCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Updated</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id);
+        System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id, System.Threading.CancellationToken cancellationToken);
-    
-        /// <returns>Deleted</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteUserAsync(int id);
+        System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Deleted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteUserAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task DeleteUserAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.2.0.0 (NJsonSchema v10.1.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class DbApiServiceClient : IDbApiServiceClient
+    internal partial class DbApiServiceClient : IDbApiServiceClient
     {
-        private System.Net.Http.HttpClient _httpClient;
-        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+        private readonly System.Net.Http.HttpClient _httpClient;
+        private readonly System.Text.Json.JsonSerializerOptions _jsonSerializerOptions;
     
-        public DbApiServiceClient(IOptions<DBApiOptions> configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public DbApiServiceClient(IOptions<DBApiOptions> options, System.Net.Http.HttpClient httpClient)
         {
             _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient.BaseAddress = options?.Value?.Url ?? throw new System.ArgumentNullException(nameof(options.Value));
+            _jsonSerializerOptions = new System.Text.Json.JsonSerializerOptions
             {
-                var settings = new Newtonsoft.Json.JsonSerializerSettings();
-                UpdateJsonSerializerSettings(settings);
-                return settings;
-            });
+                IgnoreNullValues = true,
+                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
+            };
         }
     
-        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync()
-        {
-            return GetChatMessageListAsync(System.Threading.CancellationToken.None);
-        }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatMessages");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -176,260 +116,213 @@ namespace OAuth.Infrastructure.Services
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body)
-        {
-            return CreateChatMessageAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatMessages");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _jsonSerializerOptions));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(int);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid)
-        {
-            return GetChatMessageListByChatRoomGuidAsync(guid, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (guid == null)
+            if (guid == null) {
                 throw new System.ArgumentNullException("guid");
+            }
     
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("chat-room/{Guid}");
             urlBuilder_.Replace("{Guid}", System.Uri.EscapeDataString(ConvertToString(guid, System.Globalization.CultureInfo.InvariantCulture)));
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -437,126 +330,102 @@ namespace OAuth.Infrastructure.Services
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync()
-        {
-            return GetChatRoomListAsync(System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatRooms");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -564,260 +433,213 @@ namespace OAuth.Infrastructure.Services
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body)
-        {
-            return CreateChatRoomAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatRooms");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _jsonSerializerOptions));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(int);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id)
-        {
-            return GetChatRoomByUserIdAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
+            if (id == null) {
                 throw new System.ArgumentNullException("id");
+            }
     
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("user/{Id}");
             urlBuilder_.Replace("{Id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -825,260 +647,213 @@ namespace OAuth.Infrastructure.Services
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<GetChatRoomByUserIdQueryResponse>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<GetChatRoomByUserIdQueryResponse>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(GetChatRoomByUserIdQueryResponse);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body)
-        {
-            return CreateRefreshTokenAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/RefreshTokens");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _jsonSerializerOptions));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(int);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token)
-        {
-            return GetRefreshTokenByTokenAsync(token, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (token == null)
+            if (token == null) {
                 throw new System.ArgumentNullException("token");
+            }
     
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/RefreshTokens/token/{Token}");
             urlBuilder_.Replace("{Token}", System.Uri.EscapeDataString(ConvertToString(token, System.Globalization.CultureInfo.InvariantCulture)));
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1086,392 +861,321 @@ namespace OAuth.Infrastructure.Services
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<GetRefreshTokenByTokenQueryResponse>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<GetRefreshTokenByTokenQueryResponse>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "404") 
+                        if (status_ == 404) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Received", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(GetRefreshTokenByTokenQueryResponse);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Created</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<int> CreateUserAsync(CreateUserCommand body)
-        {
-            return CreateUserAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<int> CreateUserAsync(CreateUserCommand body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<int> CreateUserAsync(CreateUserCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _jsonSerializerOptions));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(int);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Updated</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body)
-        {
-            return UpdateUserAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Updated</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users");
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _jsonSerializerOptions));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
                             return;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
                     }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Received</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id)
-        {
-            return GetUserByIdAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
+            if (id == null) {
                 throw new System.ArgumentNullException("id");
+            }
     
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users/{Id}");
             urlBuilder_.Replace("{Id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1479,290 +1183,211 @@ namespace OAuth.Infrastructure.Services
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<GetUserByIdQueryResponse>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
+                            var result = await ReadContentAsync<GetUserByIdQueryResponse>(response_.Content).ConfigureAwait(false);
+                            return result;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
             
                         return default(GetUserByIdQueryResponse);
                     }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
-        }
-    
-        /// <returns>Deleted</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task DeleteUserAsync(int id)
-        {
-            return DeleteUserAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Deleted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task DeleteUserAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task DeleteUserAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
+            if (id == null) {
                 throw new System.ArgumentNullException("id");
+            }
     
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users/{Id}");
             urlBuilder_.Replace("{Id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
     
-            var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
     
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200) 
                         {
                             return;
                         }
                         else
-                        if (status_ == "504") 
+                        if (status_ == 504) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Gateway Timeout", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == "503") 
+                        if (status_ == 503) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Service Unavailable", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == "502") 
+                        if (status_ == 502) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Gateway", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == "501") 
+                        if (status_ == 501) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Not Implemented", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == 500) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Internal Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == "415") 
+                        if (status_ == 415) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Unsupported Media Type", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "413") 
+                        if (status_ == 413) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Payload Too Large", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == "412") 
+                        if (status_ == 412) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Precondition Failed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "405") 
+                        if (status_ == 405) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Method Not Allowed", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == "400") 
+                        if (status_ == 400) 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiProblemDetails>(response_, headers_).ConfigureAwait(false);
-                            throw new ApiException<ApiProblemDetails>("Bad Request", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ValidateException(result.Detail, result);
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != 200 && status_ != 204)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
                     }
                 }
             }
-            finally
+            catch (System.Exception exception_)
             {
+                throw exception_;
             }
         }
     
-        protected struct ObjectResponseResult<T>
+        private async System.Threading.Tasks.Task<TObject> ReadContentAsync<TObject>(System.Net.Http.HttpContent content)
         {
-            public ObjectResponseResult(T responseObject, string responseText)
-            {
-                this.Object = responseObject;
-                this.Text = responseText;
-            }
-    
-            public T Object { get; }
-    
-            public string Text { get; }
-        }
-    
-        public bool ReadResponseAsString { get; set; }
-        
-        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
-        {
-            if (response == null || response.Content == null)
-            {
-                return new ObjectResponseResult<T>(default(T), string.Empty);
-            }
-        
-            if (ReadResponseAsString)
-            {
-                var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
-                    return new ObjectResponseResult<T>(typedBody, responseText);
-                }
-                catch (Newtonsoft.Json.JsonException exception)
-                {
-                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
-                }
-            }
-            else
+            using (var stream = await content.ReadAsStreamAsync().ConfigureAwait(false))
             {
                 try
                 {
-                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    using (var streamReader = new System.IO.StreamReader(responseStream))
-                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
-                    {
-                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
-                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
-                        return new ObjectResponseResult<T>(typedBody, string.Empty);
-                    }
+                    var result = await System.Text.Json.JsonSerializer.DeserializeAsync<TObject>(stream);
+                    return result;
                 }
-                catch (Newtonsoft.Json.JsonException exception)
+                catch (System.Exception)
                 {
-                    var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                    var str = await content.ReadAsStringAsync().ConfigureAwait(false);
+                    throw new ApiException($"Failed to deserialize {typeof(TObject).FullName}", str);
                 }
             }
         }
@@ -1975,41 +1600,6 @@ namespace OAuth.Infrastructure.Services
         public string Email { get; set; }
     
     
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.2.0.0 (NJsonSchema v10.1.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class ApiException : System.Exception
-    {
-        public int StatusCode { get; private set; }
-
-        public string Response { get; private set; }
-
-        public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
-
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException) 
-            : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + response.Substring(0, response.Length >= 512 ? 512 : response.Length), innerException)
-        {
-            StatusCode = statusCode;
-            Response = response; 
-            Headers = headers;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("HTTP Response: \n\n{0}\n\n{1}", Response, base.ToString());
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.2.0.0 (NJsonSchema v10.1.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class ApiException<TResult> : ApiException
-    {
-        public TResult Result { get; private set; }
-
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException) 
-            : base(message, statusCode, response, headers, innerException)
-        {
-            Result = result;
-        }
     }
 
 }
