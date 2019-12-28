@@ -16,5 +16,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\OAuth.Core\OAuth.Core.csproj" />
+    <ProjectReference Include="..\OAuth.Infrastructure\OAuth.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

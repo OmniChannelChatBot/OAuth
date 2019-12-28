@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OAuth.Api.Application.Validators;
 using OAuth.Api.Controllers.Filters;
 using OAuth.Core.Interfaces;
 using OAuth.Core.Options;
 using OAuth.Core.Services;
+using OAuth.Infrastructure.Services;
 using System;
 using System.Text;
 
@@ -19,10 +19,11 @@ namespace OAuth.Api.Extensions
     {
         private static readonly string _namespaceApplication = $"{nameof(OAuth)}.{nameof(Api)}.{nameof(Application)}";
 
-        public static void AddApplicationServices(this IServiceCollection services) => services
+        public static void AddApplicationServices(this IServiceCollection services, Action<DBApiOptions> options) => services
+            .Configure(options)
             .AddMediatR()
             .AddMediatRHandlers()
-            .AddScoped<IUserService, UserService>()
+            .AddIntergationServices()
             .AddScoped<ISecurityTokenService, SecurityTokenService>();
 
         public static IServiceCollection AddHealthCheckServices(this IServiceCollection services)
@@ -84,6 +85,12 @@ namespace OAuth.Api.Extensions
                 })
                 .AddFluentValidation();
 
+        private static IServiceCollection AddIntergationServices(this IServiceCollection services)
+        {
+            services.AddHttpClient<IDbApiServiceClient, DbApiServiceClient>();
+
+            return services;
+        }
 
         private static IServiceCollection AddMediatR(this IServiceCollection services) => services
             .AddScoped<ServiceFactory>(p => t => p.GetService(t))

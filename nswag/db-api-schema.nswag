@@ -26,7 +26,7 @@
       "generateBaseUrlProperty": false,
       "generateSyncMethods": false,
       "exposeJsonSerializerSettings": false,
-      "clientClassAccessModifier": "internal",
+      "clientClassAccessModifier": "public",
       "typeAccessModifier": "public",
       "generateContractsOutput": false,
       "contractsNamespace": null,
@@ -92,7 +92,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../OAuth.Infrastructure/Services/DbApiServiceClient.cs"
+      "output": "../src/OAuth.Infrastructure/Services/DbApiServiceClient.cs"
     }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using OAuth.Api.Models;
+using OAuth.Core.Exceptions;
 using System;
 using System.Net.Mime;
 using System.Text.Json;
@@ -36,9 +37,59 @@ namespace OAuth.Api.Middlewares
                     apiProblemDetails = new ApiProblemDetails(context, tex);
                     break;
 
+                case GatewayTimeoutException gte:
+                    context.Response.StatusCode = StatusCodes.Status504GatewayTimeout;
+                    apiProblemDetails = new ApiProblemDetails(context, gte);
+                    break;
+
+                case ServiceUnavailableException sue:
+                    context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+                    apiProblemDetails = new ApiProblemDetails(context, sue);
+                    break;
+
+                case BadGatewayException bge:
+                    context.Response.StatusCode = StatusCodes.Status502BadGateway;
+                    apiProblemDetails = new ApiProblemDetails(context, bge);
+                    break;
+
                 case NotImplementedException nie:
                     context.Response.StatusCode = StatusCodes.Status501NotImplemented;
                     apiProblemDetails = new ApiProblemDetails(context, nie);
+                    break;
+
+                case UserException ue:
+                    context.Response.StatusCode = StatusCodes.Status451UnavailableForLegalReasons;
+                    apiProblemDetails = new ApiProblemDetails(context, ue);
+                    break;
+
+                case UnsupportedMediaTypeException umte:
+                    context.Response.StatusCode = StatusCodes.Status415UnsupportedMediaType;
+                    apiProblemDetails = new ApiProblemDetails(context, umte);
+                    break;
+
+                case PayloadTooLargeException ptle:
+                    context.Response.StatusCode = StatusCodes.Status413PayloadTooLarge;
+                    apiProblemDetails = new ApiProblemDetails(context, ptle);
+                    break;
+
+                case PreconditionFailedException pfe:
+                    context.Response.StatusCode = StatusCodes.Status412PreconditionFailed;
+                    apiProblemDetails = new ApiProblemDetails(context, pfe);
+                    break;
+
+                case MethodNotAllowedException mnae:
+                    context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
+                    apiProblemDetails = new ApiProblemDetails(context, mnae);
+                    break;
+
+                case NotFoundException nfe:
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    apiProblemDetails = new ApiProblemDetails(context, nfe);
+                    break;
+
+                case BadRequestException bre:
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    apiProblemDetails = new ApiProblemDetails(context, bre);
                     break;
 
                 default:

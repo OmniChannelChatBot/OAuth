@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OAuth.Api.Extensions;
@@ -21,7 +20,7 @@ namespace OAuth
             services.AddHealthCheckServices();
             services.AddJwtBearerAuthentication(options => Configuration.GetSection(nameof(SecurityTokenOptions)).Bind(options));
             services.AddAutoMapper(typeof(Startup));
-            services.AddApplicationServices();
+            services.AddApplicationServices(options => Configuration.GetSection(nameof(DBApiOptions)).Bind(options));
             services.AddApiServices();
             services.AddCustomSwagger();
         }

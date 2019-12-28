@@ -1,41 +1,31 @@
-﻿using AutoMapper;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OAuth.Api.Application.Entity;
+using OAuth.Api.Application.Commands;
 using OAuth.Api.Application.Models;
-using OAuth.Api.Application.Services;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace OAuth.Api.Controllers
 {
     [Authorize]
-    [ApiController]
-    [Route("api/[controller]")]
-    [Produces(MediaTypeNames.Application.Json)]
-    [Consumes(MediaTypeNames.Application.Json)]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
-        private readonly IUserService _userService;
-        private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public UsersController(IUserService userService, IMapper mapper)
-        {
-            _userService = userService;
-            _mapper = mapper;
-        }
+        public UsersController(IMediator mediator) =>
+            _mediator = mediator;
 
         [AllowAnonymous]
         [HttpPost]
-        [SwaggerOperation(OperationId = nameof(Create))]
+        [SwaggerOperation(OperationId = nameof(CreateUserAsync))]
         [SwaggerResponse(StatusCodes.Status200OK, "Created")]
-        public async Task<IActionResult> Create([FromBody, BindRequired]CreateUserModel model)
+        public async Task<IActionResult> CreateUserAsync([FromBody, BindRequired]CreateUserCommand command)
         {
-            await _userService.CreateAsync(_mapper.Map<User>(model));
-            return Ok();
+            var userId = await _mediator.Send(command);
+            return Ok(userId);
         }
 
         //[AllowAnonymous]
@@ -49,13 +39,13 @@ namespace OAuth.Api.Controllers
         //    return Ok(exists);
         //}
 
-        [HttpGet("{Id:int}")]
-        [SwaggerOperation(OperationId = nameof(GetById))]
-        [SwaggerResponse(StatusCodes.Status200OK, "User received", typeof(User))]
-        public async Task<IActionResult> GetById([FromRoute]GetUserModel model)
-        {
-            var user = await _userService.GetAsync(model.Id);
-            return Ok(user);
-        }
+        //[HttpGet("{Id:int}")]
+        //[SwaggerOperation(OperationId = nameof(GetById))]
+        //[SwaggerResponse(StatusCodes.Status200OK, "User received", typeof(User))]
+        //public async Task<IActionResult> GetById([FromRoute]GetUserModel model)
+        //{
+        //    var user = await _userService.GetAsync(model.Id);
+        //    return Ok(user);
+        //}
     }
 }
