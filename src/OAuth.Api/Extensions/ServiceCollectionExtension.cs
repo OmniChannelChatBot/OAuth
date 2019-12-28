@@ -82,13 +82,11 @@ namespace OAuth.Api.Extensions
                 {
                     options.SuppressModelStateInvalidFilter = true;
                     options.SuppressMapClientErrors = true;
-                })
-                .AddFluentValidation();
+                });
 
         private static IServiceCollection AddIntergationServices(this IServiceCollection services)
         {
             services.AddHttpClient<IDbApiServiceClient, DbApiServiceClient>();
-
             return services;
         }
 
@@ -117,16 +115,13 @@ namespace OAuth.Api.Extensions
             });
 
         private static IServiceCollection AddFluentValidators(this IServiceCollection services) => services
-            .Scan(scan =>
-            {
-                scan
-                    .FromAssemblies(typeof(Startup).Assembly)
-                    .AddClasses(classes => classes
-                        .InNamespaces(_namespaceApplication)
-                        .AssignableTo(typeof(IValidator<>)))
-                    .AsImplementedInterfaces()
-                    .WithScopedLifetime();
-            });
+            .Scan(scan => scan
+                .FromAssemblies(typeof(Startup).Assembly)
+                .AddClasses(classes => classes
+                    .InNamespaces(_namespaceApplication)
+                    .AssignableTo(typeof(IValidator<>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
 
         private static IServiceCollection AddMvcActionFilters(this IServiceCollection services) => services
             .AddScoped<ApiActionFilter>()

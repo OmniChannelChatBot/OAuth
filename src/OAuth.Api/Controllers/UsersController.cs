@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OAuth.Api.Application.Commands;
-using OAuth.Api.Application.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 

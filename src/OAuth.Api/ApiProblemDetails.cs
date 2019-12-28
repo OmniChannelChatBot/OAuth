@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -19,6 +20,13 @@ namespace OAuth.Api.Models
                 .ToDictionary(
                     pair => pair.Key,
                     pair => pair.Value.Errors.Select(n => !string.IsNullOrEmpty(n.ErrorMessage) ? n.ErrorMessage : n.Exception.Message));
+
+        public ApiProblemDetails(HttpContext context, IList<ValidationFailure> errors)
+           : this(context) =>
+            Errors = errors
+                .GroupBy(g => g.PropertyName)
+                .ToDictionary(n => n.Key, n => n.Select(s => s.ErrorMessage));
+
 
         public ApiProblemDetails(HttpContext context, Exception exception)
               : this(context)
