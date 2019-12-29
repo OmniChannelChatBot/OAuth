@@ -2,7 +2,7 @@
 
 | branch  |  link |
 |---|---|
-| master  |  [![Build Status](https://travis-ci.org/OmniChannelChatBot/OAuth.Api.svg?branch=master)](https://travis-ci.org/OmniChannelChatBot/OAuth) |
+| master  |  [![Build Status](https://travis-ci.org/OmniChannelChatBot/OAuth.svg?branch=master)](https://travis-ci.org/OmniChannelChatBot/OAuth) |
 |  dev |   |
 
 
