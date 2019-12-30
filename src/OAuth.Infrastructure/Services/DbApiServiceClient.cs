@@ -17,7 +17,7 @@ using OAuth.Core.Exceptions;
 namespace OAuth.Infrastructure.Services
 {
     using System = global::System;
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.2.0.0 (NJsonSchema v10.1.2.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial interface IDbApiServiceClient
     {
@@ -25,78 +25,83 @@ namespace OAuth.Infrastructure.Services
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>> GetChatMessageListAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> CreateChatMessageAsync(CreateChatMessageCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>> GetChatRoomListAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> CreateChatRoomAsync(CreateChatRoomCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Created</returns>
+        /// <returns>Added</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+        System.Threading.Tasks.Task<int> AddRefreshTokenAsync(AddRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Added</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> AddUserAsync(AddUserCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Updated</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task UpdateUserAsync(UpdateUserCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Deleted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task DeleteUserAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Available</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<bool> AvailabilityUsernameAsync(string username, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Received</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<FindUserByUsernameQueryResponse> FindUserByUsernameAsync(string username, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.2.0.0 (NJsonSchema v10.1.2.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DbApiServiceClient : IDbApiServiceClient
     {
         private readonly System.Net.Http.HttpClient _httpClient;
         private readonly System.Text.Json.JsonSerializerOptions _jsonSerializerOptions;
-    
+
         public DbApiServiceClient(IOptions<DBApiOptions> options, System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
+            _httpClient = httpClient;
             _httpClient.BaseAddress = options?.Value?.Url ?? throw new System.ArgumentNullException($"{nameof(DBApiOptions)}.{nameof(options.Value.Url)}");
             _jsonSerializerOptions = new System.Text.Json.JsonSerializerOptions
             {
@@ -104,8 +109,8 @@ namespace OAuth.Infrastructure.Services
                 PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
             };
         }
-    
-    
+
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -113,81 +118,81 @@ namespace OAuth.Infrastructure.Services
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatMessages");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -198,7 +203,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(System.Collections.Generic.IReadOnlyList<GetChatMessageListQueryResponse>);
                     }
                 }
@@ -208,7 +213,7 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -216,7 +221,7 @@ namespace OAuth.Infrastructure.Services
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatMessages");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -226,74 +231,74 @@ namespace OAuth.Infrastructure.Services
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -304,7 +309,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(int);
                     }
                 }
@@ -314,94 +319,95 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>> GetChatMessageListByChatRoomGuidAsync(System.Guid guid, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (guid == null) {
+            if (guid == null)
+            {
                 throw new System.ArgumentNullException("guid");
             }
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("chat-room/{Guid}");
             urlBuilder_.Replace("{Guid}", System.Uri.EscapeDataString(ConvertToString(guid, System.Globalization.CultureInfo.InvariantCulture)));
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -412,7 +418,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(System.Collections.Generic.IReadOnlyList<GetChatMessageListByChatRoomGuidQueryResponse>);
                     }
                 }
@@ -422,7 +428,7 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -430,81 +436,81 @@ namespace OAuth.Infrastructure.Services
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatRooms");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -515,7 +521,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(System.Collections.Generic.IReadOnlyList<GetListChatRoomQueryResponse>);
                     }
                 }
@@ -525,7 +531,7 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -533,7 +539,7 @@ namespace OAuth.Infrastructure.Services
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/ChatRooms");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -543,74 +549,74 @@ namespace OAuth.Infrastructure.Services
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -621,7 +627,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(int);
                     }
                 }
@@ -631,94 +637,95 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<GetChatRoomByUserIdQueryResponse> GetChatRoomByUserIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null) {
+            if (id == null)
+            {
                 throw new System.ArgumentNullException("id");
             }
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("user/{Id}");
             urlBuilder_.Replace("{Id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<GetChatRoomByUserIdQueryResponse>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -729,7 +736,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(GetChatRoomByUserIdQueryResponse);
                     }
                 }
@@ -739,15 +746,15 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Created</returns>
+        /// <returns>Added</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<int> CreateRefreshTokenAsync(CreateRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<int> AddRefreshTokenAsync(AddRefreshTokenCommand body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/RefreshTokens");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -757,74 +764,74 @@ namespace OAuth.Infrastructure.Services
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -835,7 +842,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(int);
                     }
                 }
@@ -845,100 +852,101 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<GetRefreshTokenByTokenQueryResponse> GetRefreshTokenByTokenAsync(string token, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (token == null) {
+            if (token == null)
+            {
                 throw new System.ArgumentNullException("token");
             }
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/RefreshTokens/token/{Token}");
             urlBuilder_.Replace("{Token}", System.Uri.EscapeDataString(ConvertToString(token, System.Globalization.CultureInfo.InvariantCulture)));
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<GetRefreshTokenByTokenQueryResponse>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 404) 
+                        if (status_ == 404)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -949,7 +957,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(GetRefreshTokenByTokenQueryResponse);
                     }
                 }
@@ -959,7 +967,7 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Added</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -967,7 +975,7 @@ namespace OAuth.Infrastructure.Services
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -977,74 +985,74 @@ namespace OAuth.Infrastructure.Services
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<int>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -1055,7 +1063,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(int);
                     }
                 }
@@ -1065,7 +1073,7 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Updated</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1073,7 +1081,7 @@ namespace OAuth.Infrastructure.Services
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users");
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1082,73 +1090,73 @@ namespace OAuth.Infrastructure.Services
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             return;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -1167,94 +1175,95 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Received</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<GetUserByIdQueryResponse> GetUserByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null) {
+            if (id == null)
+            {
                 throw new System.ArgumentNullException("id");
             }
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users/{Id}");
             urlBuilder_.Replace("{Id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<GetUserByIdQueryResponse>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -1265,7 +1274,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(GetUserByIdQueryResponse);
                     }
                 }
@@ -1275,92 +1284,93 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Deleted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task DeleteUserAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null) {
+            if (id == null)
+            {
                 throw new System.ArgumentNullException("id");
             }
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Users/{Id}");
             urlBuilder_.Replace("{Id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             return;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -1379,94 +1389,95 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Available</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<bool> AvailabilityUsernameAsync(string username, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (username == null) {
+            if (username == null)
+            {
                 throw new System.ArgumentNullException("username");
             }
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/Users/availability/{Username}");
+            urlBuilder_.Append("api/Users/availability/username/{Username}");
             urlBuilder_.Replace("{Username}", System.Uri.EscapeDataString(ConvertToString(username, System.Globalization.CultureInfo.InvariantCulture)));
-    
+
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
+
                     using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
                     {
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200) 
+                        if (status_ == 200)
                         {
                             var result = await ReadContentAsync<bool>(response_.Content).ConfigureAwait(false);
                             return result;
                         }
                         else
-                        if (status_ == 504) 
+                        if (status_ == 504)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
                         }
                         else
-                        if (status_ == 503) 
+                        if (status_ == 503)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
                         }
                         else
-                        if (status_ == 502) 
+                        if (status_ == 502)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
                         }
                         else
-                        if (status_ == 501) 
+                        if (status_ == 501)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 500) 
+                        if (status_ == 500)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
                         }
                         else
-                        if (status_ == 415) 
+                        if (status_ == 415)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 413) 
+                        if (status_ == 413)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
                         }
                         else
-                        if (status_ == 412) 
+                        if (status_ == 412)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 405) 
+                        if (status_ == 405)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
                         }
                         else
-                        if (status_ == 400) 
+                        if (status_ == 400)
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
                             throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
@@ -1477,7 +1488,7 @@ namespace OAuth.Infrastructure.Services
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
                         }
-            
+
                         return default(bool);
                     }
                 }
@@ -1487,14 +1498,123 @@ namespace OAuth.Infrastructure.Services
                 throw exception_;
             }
         }
-    
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Received</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<FindUserByUsernameQueryResponse> FindUserByUsernameAsync(string username, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (username == null)
+            {
+                throw new System.ArgumentNullException("username");
+            }
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("api/Users/username/{Username}");
+            urlBuilder_.Replace("{Username}", System.Uri.EscapeDataString(ConvertToString(username, System.Globalization.CultureInfo.InvariantCulture)));
+
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    using (var response_ = await _httpClient.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
+                    {
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var result = await ReadContentAsync<FindUserByUsernameQueryResponse>(response_.Content).ConfigureAwait(false);
+                            return result;
+                        }
+                        else
+                        if (status_ == 504)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.GatewayTimeoutException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 503)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ServiceUnavailableException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 502)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadGatewayException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 501)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 500)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.ApiException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 415)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.UnsupportedMediaTypeException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 413)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PayloadTooLargeException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 412)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.PreconditionFailedException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 405)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.MethodNotAllowedException(result.Detail, result);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new OAuth.Core.Exceptions.BadRequestException(result.Detail, result);
+                        }
+                        else
+                        if (status_ != 200 && status_ != 204)
+                        {
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException($"HTTP response status code {status_} was not expected", responseData_);
+                        }
+
+                        return default(FindUserByUsernameQueryResponse);
+                    }
+                }
+            }
+            catch (System.Exception exception_)
+            {
+                throw exception_;
+            }
+        }
+
         private async System.Threading.Tasks.Task<TObject> ReadContentAsync<TObject>(System.Net.Http.HttpContent content)
         {
             using (var stream = await content.ReadAsStreamAsync().ConfigureAwait(false))
             {
                 try
                 {
-                    var result = await System.Text.Json.JsonSerializer.DeserializeAsync<TObject>(stream);
+                    var result = await System.Text.Json.JsonSerializer.DeserializeAsync<TObject>(stream, _jsonSerializerOptions);
                     return result;
                 }
                 catch (System.Exception)
@@ -1504,7 +1624,7 @@ namespace OAuth.Infrastructure.Services
                 }
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -1515,7 +1635,7 @@ namespace OAuth.Infrastructure.Services
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -1524,201 +1644,240 @@ namespace OAuth.Infrastructure.Services
                     }
                 }
             }
-            else if (value is bool) {
+            else if (value is bool)
+            {
                 return System.Convert.ToString(value, cultureInfo).ToLowerInvariant();
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value != null && value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class GetChatMessageListQueryResponse 
+    public partial class GetChatMessageListQueryResponse
     {
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class ApiProblemDetails 
+    public partial class ApiProblemDetails
     {
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("errors", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, System.Collections.Generic.IReadOnlyList<string>> Errors { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Type { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Status { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("detail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Detail { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("instance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Instance { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("extensions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, object> Extensions { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class CreateChatMessageCommand 
+    public partial class CreateChatMessageCommand
     {
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class GetChatMessageListByChatRoomGuidQueryResponse 
+    public partial class GetChatMessageListByChatRoomGuidQueryResponse
     {
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class GetListChatRoomQueryResponse 
+    public partial class GetListChatRoomQueryResponse
     {
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class CreateChatRoomCommand 
+    public partial class CreateChatRoomCommand
     {
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class GetChatRoomByUserIdQueryResponse 
+    public partial class GetChatRoomByUserIdQueryResponse
     {
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class CreateRefreshTokenCommand 
+    public partial class AddRefreshTokenCommand
     {
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Always)]
         public int UserId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Token { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("expires", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.DateTimeOffset Expires { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("remoteIpAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RemoteIpAddress { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class GetRefreshTokenByTokenQueryResponse 
+    public partial class GetRefreshTokenByTokenQueryResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         public int Id { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.Guid Guid { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Token { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("expires", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.DateTimeOffset Expires { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class AddUserCommand 
+    public partial class AddUserCommand
     {
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.AllowNull)]
         public string FirstName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.AllowNull)]
         public string LastName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("username", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Username { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.AllowNull)]
-        public string Password { get; set; }
-    
+
+        [Newtonsoft.Json.JsonProperty("passwordHash", Required = Newtonsoft.Json.Required.AllowNull)]
+        public byte[] PasswordHash { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("passwordSalt", Required = Newtonsoft.Json.Required.AllowNull)]
+        public byte[] PasswordSalt { get; set; }
+
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Email { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Type { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class UpdateUserCommand 
+    public partial class UpdateUserCommand
     {
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FirstName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LastName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("username", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Username { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Password { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class GetUserByIdQueryResponse 
+    public partial class GetUserByIdQueryResponse
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         public int Id { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.Guid Guid { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.AllowNull)]
         public string FirstName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.AllowNull)]
         public string LastName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("username", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        [Newtonsoft.Json.JsonProperty("username", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Username { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Email { get; set; }
-    
-    
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class FindUserByUsernameQueryResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid Guid { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.AllowNull)]
+        public string FirstName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.AllowNull)]
+        public string LastName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("username", Required = Newtonsoft.Json.Required.AllowNull)]
+        public string Username { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("passwordHash", Required = Newtonsoft.Json.Required.AllowNull)]
+        public byte[] PasswordHash { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("passwordSalt", Required = Newtonsoft.Json.Required.AllowNull)]
+        public byte[] PasswordSalt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.AllowNull)]
+        public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        public int Type { get; set; }
+
+
     }
 
 }
 
 #pragma warning restore 1591
 #pragma warning restore 1573
-#pragma warning restore  472
-#pragma warning restore  114
-#pragma warning restore  108
+#pragma warning restore 472
+#pragma warning restore 114
+#pragma warning restore 108

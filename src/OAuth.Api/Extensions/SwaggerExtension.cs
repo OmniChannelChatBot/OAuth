@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using OAuth.Api.Models;
@@ -14,11 +15,11 @@ namespace OAuth.Api.Extensions
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services) => services
             .AddSwaggerGen(c =>
              {
-                 const string Scheme = "Bearer";
+                 const string Scheme = JwtBearerDefaults.AuthenticationScheme;
 
                  c.AddSecurityDefinition(Scheme, new OpenApiSecurityScheme
                  {
-                     Description = "Bearer authentication",
+                     Description = $"{JwtBearerDefaults.AuthenticationScheme} authentication",
                      Type = SecuritySchemeType.Http,
                      Scheme = Scheme.ToLower(),
                      BearerFormat = "JWT"

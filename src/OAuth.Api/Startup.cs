@@ -17,8 +17,11 @@ namespace OAuth
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddHealthCheckServices();
-            services.AddJwtBearerAuthentication(options => Configuration.GetSection(nameof(SecurityTokenOptions)).Bind(options));
+            services.AddJwtBearerAuthentication(
+                options => Configuration.GetSection(nameof(AccessTokenOptions)).Bind(options),
+                options => Configuration.GetSection(nameof(RefreshTokenOptions)).Bind(options));
             services.AddAutoMapper(typeof(Startup));
             services.AddApplicationServices(options => Configuration.GetSection(nameof(DBApiOptions)).Bind(options));
             services.AddApiServices();

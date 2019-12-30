@@ -4,7 +4,7 @@
     {
         try
         {
-            var result = await System.Text.Json.JsonSerializer.DeserializeAsync<TObject>(stream);
+            var result = await System.Text.Json.JsonSerializer.DeserializeAsync<TObject>(stream, _jsonSerializerOptions);
             return result;
         }
         catch (System.Exception)

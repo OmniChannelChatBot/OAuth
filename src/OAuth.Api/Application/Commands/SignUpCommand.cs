@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OAuth.Api.Application.Commands
 {
-    public class CreateUserCommand : IRequest<int>
+    public class SignUpCommand : IRequest<int>
     {
         [Required]
         public string Username { get; set; }

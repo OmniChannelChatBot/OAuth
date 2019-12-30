@@ -7,10 +7,10 @@ using System;
 
 namespace OAuth.Api.Application.Validators.Commands
 {
-    public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+    public class SignUpCommandValidator : AbstractValidator<SignUpCommand>
     {
         private readonly IDbApiServiceClient _dbApiServiceClient;
-        public CreateUserCommandValidator(IDbApiServiceClient dbApiServiceClient)
+        public SignUpCommandValidator(IDbApiServiceClient dbApiServiceClient)
         {
             _dbApiServiceClient = dbApiServiceClient;
 
@@ -35,7 +35,7 @@ namespace OAuth.Api.Application.Validators.Commands
                     var available = await _dbApiServiceClient.AvailabilityUsernameAsync(username, cancellationToken);
                     return !available;
                 })
-                .WithMessage($"{nameof(CreateUserCommand.Username)} is already in use");
+                .WithMessage($"{nameof(SignUpCommand.Username)} is already in use");
             RuleFor(command => command.Password)
                 .NotNull()
                 .WithMessage("Must not be null")

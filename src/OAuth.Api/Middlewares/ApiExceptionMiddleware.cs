@@ -57,11 +57,6 @@ namespace OAuth.Api.Middlewares
                     apiProblemDetails = new ApiProblemDetails(context, nie);
                     break;
 
-                case UserException ue:
-                    context.Response.StatusCode = StatusCodes.Status451UnavailableForLegalReasons;
-                    apiProblemDetails = new ApiProblemDetails(context, ue);
-                    break;
-
                 case UnsupportedMediaTypeException umte:
                     context.Response.StatusCode = StatusCodes.Status415UnsupportedMediaType;
                     apiProblemDetails = new ApiProblemDetails(context, umte);

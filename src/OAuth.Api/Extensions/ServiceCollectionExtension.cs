@@ -12,6 +12,7 @@ using OAuth.Core.Services;
 using OAuth.Infrastructure.Services;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OAuth.Api.Extensions
 {
@@ -24,7 +25,8 @@ namespace OAuth.Api.Extensions
             .AddMediatR()
             .AddMediatRHandlers()
             .AddIntergationServices()
-            .AddScoped<ISecurityTokenService, SecurityTokenService>();
+            .AddScoped<ITokenService, TokenService>()
+            .AddSingleton<IPasswordService, PasswordService>();
 
         public static IServiceCollection AddHealthCheckServices(this IServiceCollection services)
         {
@@ -33,10 +35,10 @@ namespace OAuth.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<SecurityTokenOptions> options)
+        public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<AccessTokenOptions> accessTokenOptions, Action<RefreshTokenOptions> refreshTokenOptions)
         {
-            services.Configure(options);
-
+            services.Configure(accessTokenOptions);
+            services.Configure(refreshTokenOptions);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,25 +47,36 @@ namespace OAuth.Api.Extensions
             })
             .AddJwtBearer(x =>
             {
-                var securityTokenOptions = services
+                var accessTokenOptions = services
                     .BuildServiceProvider()
-                    .GetRequiredService<IOptions<SecurityTokenOptions>>();
-                var key = Encoding.UTF8.GetBytes(securityTokenOptions.Value.Secret);
+                    .GetRequiredService<IOptions<AccessTokenOptions>>();
 
+                x.ClaimsIssuer = accessTokenOptions.Value.Issuer;
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(accessTokenOptions.Value.Secret)),
 
                     ValidateIssuer = true,
-                    ValidIssuer = securityTokenOptions.Value.Issuer,
+                    ValidIssuer = accessTokenOptions.Value.Issuer,
                     ValidateAudience = true,
-                    ValidAudience = securityTokenOptions.Value.Audience,
+                    ValidAudience = accessTokenOptions.Value.Audience,
                     ValidateLifetime = true,
 
                     ClockSkew = TimeSpan.FromSeconds(5)
+                };
+                x.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception is SecurityTokenExpiredException)
+                        {
+                            context.Response.Headers.Add("Token-Expired", "true");
+                        }
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
@@ -115,13 +128,14 @@ namespace OAuth.Api.Extensions
             });
 
         private static IServiceCollection AddFluentValidators(this IServiceCollection services) => services
+            .AddTransient<IValidatorFactory, ServiceProviderValidatorFactory>()
             .Scan(scan => scan
                 .FromAssemblies(typeof(Startup).Assembly)
                 .AddClasses(classes => classes
                     .InNamespaces(_namespaceApplication)
                     .AssignableTo(typeof(IValidator<>)))
                 .AsImplementedInterfaces()
-                .WithTransientLifetime());
+                .WithScopedLifetime());
 
         private static IServiceCollection AddMvcActionFilters(this IServiceCollection services) => services
             .AddScoped<ApiActionFilter>()
