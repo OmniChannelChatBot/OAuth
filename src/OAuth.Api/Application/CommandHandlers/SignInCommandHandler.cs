@@ -28,10 +28,7 @@ namespace OAuth.Api.Application.CommandHandlers
         public async Task<SignInCommandResponse> Handle(SignInCommand command, CancellationToken cancellationToken)
         {
             var user = await _dbApiServiceClient.FindUserByUsernameAsync(command.Username);
-
             var refreshToken = _tokenService.GenerateRefreshToken();
-
-            var accessToken = _tokenService.GenerateAccessToken(user.Id, user.Username);
 
             var addRefreshTokenCommand = new AddRefreshTokenCommand
             {
@@ -41,7 +38,8 @@ namespace OAuth.Api.Application.CommandHandlers
                 RemoteIpAddress = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
             };
 
-            await _dbApiServiceClient.AddRefreshTokenAsync(addRefreshTokenCommand, cancellationToken);
+            var refreshTokenId = await _dbApiServiceClient.AddRefreshTokenAsync(addRefreshTokenCommand, cancellationToken);
+            var accessToken = _tokenService.GenerateAccessToken(user.Id, user.Username, refreshTokenId);
 
             return new SignInCommandResponse
             {

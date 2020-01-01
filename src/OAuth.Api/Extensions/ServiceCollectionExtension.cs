@@ -54,19 +54,7 @@ namespace OAuth.Api.Extensions
                 x.ClaimsIssuer = accessTokenOptions.Value.Issuer;
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(accessTokenOptions.Value.Secret)),
-
-                    ValidateIssuer = true,
-                    ValidIssuer = accessTokenOptions.Value.Issuer,
-                    ValidateAudience = true,
-                    ValidAudience = accessTokenOptions.Value.Audience,
-                    ValidateLifetime = true,
-
-                    ClockSkew = TimeSpan.FromSeconds(5)
-                };
+                x.TokenValidationParameters = accessTokenOptions.Value.GetTokenValidationParameters();
                 x.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>

@@ -17,6 +17,7 @@ namespace OAuth.Core.Services
     {
         private readonly AccessTokenOptions _accessTokenOptions;
         private readonly RefreshTokenOptions _refreshTokenOptions;
+        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
 
         public TokenService(
             IOptions<AccessTokenOptions> accessTokenOptions,
@@ -24,18 +25,18 @@ namespace OAuth.Core.Services
         {
             _accessTokenOptions = accessTokenOptions?.Value ?? throw new ArgumentNullException(nameof(AccessTokenOptions));
             _refreshTokenOptions = refreshTokenOptions?.Value ?? throw new ArgumentNullException(nameof(RefreshTokenOptions));
+            _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
         }
 
-        public AccessToken GenerateAccessToken(int userId, string username)
+        public AccessToken GenerateAccessToken(int userId, string username, int refreshTokenId)
         {
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-
             var claimsIdentity = new ClaimsIdentity(
                 new GenericIdentity(username, nameof(AccessToken.Token)),
                 new Claim[]
                 {
-                    new Claim(Constants.JwtClaimIdentifiers.Id, userId.ToString()),
-                    new Claim(Constants.JwtClaimIdentifiers.Rol, Constants.JwtClaims.ApiAccess)
+                    new Claim(Constants.JwtClaimIdentifiers.UserId, userId.ToString()),
+                    new Claim(Constants.JwtClaimIdentifiers.RefreshTokenId, refreshTokenId.ToString()),
+                    new Claim(Constants.JwtClaimIdentifiers.Role, Constants.JwtClaimValues.ApiAccess)
                 });
 
             var claims = new Dictionary<string, object>
@@ -56,14 +57,14 @@ namespace OAuth.Core.Services
                 Expires = _accessTokenOptions.Expires,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_accessTokenOptions.Secret)),
-                    SecurityAlgorithms.HmacSha256Signature)
+                    SecurityAlgorithms.HmacSha256)
             };
 
-            var token = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
+            var token = _jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
 
             return new AccessToken
             {
-                Token = jwtSecurityTokenHandler.WriteToken(token),
+                Token = _jwtSecurityTokenHandler.WriteToken(token),
                 ExpiresIn = (int)TimeSpan.FromMinutes(_accessTokenOptions.ExpiresInMinutes).TotalSeconds,
             };
         }
@@ -84,29 +85,33 @@ namespace OAuth.Core.Services
             }
         }
 
-        public ClaimsPrincipal GetClaimsPrincipalByExpiredToken(string accessToken)
+        public ClaimsPrincipal GetClaimsPrincipalByExpiredAccessToken(string accessToken) =>
+            _jwtSecurityTokenHandler.ValidateToken(
+                accessToken,
+                _accessTokenOptions.GetTokenValidationParameters(validateLifetime: false),
+                out var _);
+
+        public bool VerifyExpiredAccessToken(string accessToken)
         {
-            var tokenValidationParameters = new TokenValidationParameters
+            try
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_accessTokenOptions.Secret)),
-                ValidateIssuer = true,
-                ValidIssuer = _accessTokenOptions.Issuer,
-                ValidateAudience = true,
-                ValidAudience = _accessTokenOptions.Audience,
-                ValidateLifetime = true,
-            };
+                _jwtSecurityTokenHandler.ValidateToken(
+                    accessToken,
+                    _accessTokenOptions.GetTokenValidationParameters(validateLifetime: false),
+                    out var securityToken);
 
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            var principal = jwtSecurityTokenHandler.ValidateToken(accessToken, tokenValidationParameters, out var securityToken);
+                if (!(securityToken is JwtSecurityToken jwtSecurityToken) ||
+                    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return false;
+                }
 
-            if (!(securityToken is JwtSecurityToken jwtSecurityToken) ||
-                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature, StringComparison.InvariantCultureIgnoreCase))
-            {
-                throw new SecurityTokenException("Invalid token");
+                return true;
             }
-
-            return principal;
+            catch
+            {
+                return false;
+            }
         }
 
         private long ToUnixEpochDate(DateTime date) =>

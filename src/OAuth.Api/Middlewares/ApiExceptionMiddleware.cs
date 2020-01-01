@@ -12,8 +12,17 @@ namespace OAuth.Api.Middlewares
     {
         private readonly RequestDelegate _next;
 
-        public ApiExceptionMiddleware(RequestDelegate next) =>
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
+
+        public ApiExceptionMiddleware(RequestDelegate next)
+        {
             _next = next ?? throw new ArgumentNullException(nameof(next));
+            _jsonSerializerOptions = new JsonSerializerOptions
+            {
+                IgnoreNullValues = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+        }
 
         public async Task InvokeAsync(HttpContext context)
         {
@@ -29,76 +38,25 @@ namespace OAuth.Api.Middlewares
 
         private Task HandleApiExceptionAsync(HttpContext context, Exception exception)
         {
-            ApiProblemDetails apiProblemDetails;
-            switch (exception)
+            context.Response.StatusCode = exception switch
             {
-                case TimeoutException tex:
-                    context.Response.StatusCode = StatusCodes.Status504GatewayTimeout;
-                    apiProblemDetails = new ApiProblemDetails(context, tex);
-                    break;
-
-                case GatewayTimeoutException gte:
-                    context.Response.StatusCode = StatusCodes.Status504GatewayTimeout;
-                    apiProblemDetails = new ApiProblemDetails(context, gte);
-                    break;
-
-                case ServiceUnavailableException sue:
-                    context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
-                    apiProblemDetails = new ApiProblemDetails(context, sue);
-                    break;
-
-                case BadGatewayException bge:
-                    context.Response.StatusCode = StatusCodes.Status502BadGateway;
-                    apiProblemDetails = new ApiProblemDetails(context, bge);
-                    break;
-
-                case NotImplementedException nie:
-                    context.Response.StatusCode = StatusCodes.Status501NotImplemented;
-                    apiProblemDetails = new ApiProblemDetails(context, nie);
-                    break;
-
-                case UnsupportedMediaTypeException umte:
-                    context.Response.StatusCode = StatusCodes.Status415UnsupportedMediaType;
-                    apiProblemDetails = new ApiProblemDetails(context, umte);
-                    break;
-
-                case PayloadTooLargeException ptle:
-                    context.Response.StatusCode = StatusCodes.Status413PayloadTooLarge;
-                    apiProblemDetails = new ApiProblemDetails(context, ptle);
-                    break;
-
-                case PreconditionFailedException pfe:
-                    context.Response.StatusCode = StatusCodes.Status412PreconditionFailed;
-                    apiProblemDetails = new ApiProblemDetails(context, pfe);
-                    break;
-
-                case MethodNotAllowedException mnae:
-                    context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-                    apiProblemDetails = new ApiProblemDetails(context, mnae);
-                    break;
-
-                case NotFoundException nfe:
-                    context.Response.StatusCode = StatusCodes.Status404NotFound;
-                    apiProblemDetails = new ApiProblemDetails(context, nfe);
-                    break;
-
-                case BadRequestException bre:
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    apiProblemDetails = new ApiProblemDetails(context, bre);
-                    break;
-
-                default:
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    apiProblemDetails = new ApiProblemDetails(context, exception);
-                    break;
-            }
+                TimeoutException _ => StatusCodes.Status504GatewayTimeout,
+                GatewayTimeoutException _ => StatusCodes.Status504GatewayTimeout,
+                ServiceUnavailableException _ => StatusCodes.Status503ServiceUnavailable,
+                BadGatewayException _ => StatusCodes.Status502BadGateway,
+                NotImplementedException _ => StatusCodes.Status501NotImplemented,
+                UnsupportedMediaTypeException _ => StatusCodes.Status415UnsupportedMediaType,
+                PayloadTooLargeException _ => StatusCodes.Status413PayloadTooLarge,
+                PreconditionFailedException _ => StatusCodes.Status412PreconditionFailed,
+                MethodNotAllowedException _ => StatusCodes.Status405MethodNotAllowed,
+                NotFoundException _ => StatusCodes.Status404NotFound,
+                BadRequestException _ => StatusCodes.Status400BadRequest,
+                _ => StatusCodes.Status500InternalServerError,
+            };
 
             context.Response.ContentType = MediaTypeNames.Application.Json;
-            var response = JsonSerializer.Serialize(apiProblemDetails, new JsonSerializerOptions
-            {
-                IgnoreNullValues = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+
+            var response = JsonSerializer.Serialize(new ApiProblemDetails(context, exception), _jsonSerializerOptions);
 
             return context.Response.WriteAsync(response);
         }

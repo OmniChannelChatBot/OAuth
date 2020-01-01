@@ -4,10 +4,10 @@
     {
         public static class JwtClaimIdentifiers
         {
-            public const string Rol = "rol", Id = "id";
+            public const string Role = "rol", UserId = "id", RefreshTokenId = "rtid";
         }
 
-        public static class JwtClaims
+        public static class JwtClaimValues
         {
             public const string ApiAccess = "api_access";
         }

@@ -5,10 +5,12 @@ namespace OAuth.Core.Interfaces
 {
     public interface ITokenService
     {
-        AccessToken GenerateAccessToken(int userId, string username);
+        AccessToken GenerateAccessToken(int userId, string username, int refreshTokenId);
 
         RefreshToken GenerateRefreshToken();
 
-        ClaimsPrincipal GetClaimsPrincipalByExpiredToken(string accessToken);
+        bool VerifyExpiredAccessToken(string accessToken);
+
+        ClaimsPrincipal GetClaimsPrincipalByExpiredAccessToken(string accessToken);
     }
 }

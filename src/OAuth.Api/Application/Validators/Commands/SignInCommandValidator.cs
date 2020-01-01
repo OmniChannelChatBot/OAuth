@@ -27,7 +27,6 @@ namespace OAuth.Api.Application.Validators.Commands
                         .NotEmpty()
                         .WithMessage("Should not be empty");
                     child.RuleFor(command => command.Username)
-                        .Cascade(CascadeMode.StopOnFirstFailure)
                         .NotNull()
                         .WithMessage("Must not be null")
                         .NotEmpty()
