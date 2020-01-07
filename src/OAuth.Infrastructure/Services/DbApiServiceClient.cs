@@ -1075,8 +1075,9 @@ namespace OAuth.Infrastructure.Services
             }
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/RefreshTokens/token/{Token}");
-            urlBuilder_.Replace("{Token}", System.Uri.EscapeDataString(ConvertToString(token, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Append("api/RefreshTokens?");
+            urlBuilder_.Append($"{System.Uri.EscapeDataString("Token")}=").Append(System.Uri.EscapeDataString(ConvertToString(token, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Length--;
     
             try
             {

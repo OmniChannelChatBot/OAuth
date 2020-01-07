@@ -16,33 +16,26 @@ namespace OAuth.Api.Application.Validators.Commands
             _dbApiServiceClient = dbApiServiceClient;
             _tokenService = tokenService;
 
-            RuleFor(command => command)
+            RuleFor(command => command.AccessToken)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
                 .WithMessage("Must not be null")
-                .ChildRules(child =>
+                .NotEmpty()
+                .WithMessage("Should not be empty")
+                .Must(accessToken => _tokenService.VerifyExpiredAccessToken(accessToken))
+                .WithMessage("Invalid access token");
+            RuleFor(command => command.RefreshToken)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull()
+                .WithMessage("Must not be null")
+                .NotEmpty()
+                .WithMessage("Should not be empty")
+                .MustAsync(async (refreshToken, cancellationToken) =>
                 {
-                    child.RuleFor(command => command.AccessToken)
-                        .Cascade(CascadeMode.StopOnFirstFailure)
-                        .NotNull()
-                        .WithMessage("Must not be null")
-                        .NotEmpty()
-                        .WithMessage("Should not be empty")
-                        .Must(accessToken => _tokenService.VerifyExpiredAccessToken(accessToken))
-                        .WithMessage("Invalid access token");
-                    child.RuleFor(command => command.RefreshToken)
-                        .Cascade(CascadeMode.StopOnFirstFailure)
-                        .NotNull()
-                        .WithMessage("Must not be null")
-                        .NotEmpty()
-                        .WithMessage("Should not be empty")
-                        .MustAsync(async (refreshToken, cancellationToken) =>
-                        {
-                            var result = await _dbApiServiceClient.FindRefreshTokenByTokenAsync(refreshToken, cancellationToken);
-                            return result != default && result.Token == refreshToken && result.Expires >= DateTimeOffset.UtcNow;
-                        })
-                        .WithMessage("Token not found or expired");
-                });
+                    var result = await _dbApiServiceClient.FindRefreshTokenByTokenAsync(refreshToken, cancellationToken);
+                    return result != default && result.Token == refreshToken && result.Expires >= DateTimeOffset.UtcNow;
+                })
+                .WithMessage("Token not found or expired");
         }
     }
 }

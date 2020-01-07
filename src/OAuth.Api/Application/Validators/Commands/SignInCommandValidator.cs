@@ -17,8 +17,6 @@ namespace OAuth.Api.Application.Validators.Commands
 
             RuleFor(command => command)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .NotNull()
-                .WithMessage("Must not be null")
                 .ChildRules(child =>
                 {
                     child.RuleFor(command => command.Password)

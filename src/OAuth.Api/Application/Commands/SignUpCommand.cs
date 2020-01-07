@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using OAuth.Api.Application.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace OAuth.Api.Application.Commands
 {
@@ -22,6 +23,7 @@ namespace OAuth.Api.Application.Commands
         public string Email { get; set; }
 
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public UserType Type { get; set; }
     }
 }
