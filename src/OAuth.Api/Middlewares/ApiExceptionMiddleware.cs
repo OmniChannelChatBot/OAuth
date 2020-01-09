@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using OAuth.Api.Models;
 using OAuth.Core.Exceptions;
+using OCCBPackage.Mvc;
 using System;
 using System.Net.Mime;
 using System.Text.Json;
