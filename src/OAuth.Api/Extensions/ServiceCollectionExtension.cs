@@ -26,12 +26,6 @@ namespace OAuth.Api.Extensions
             .AddScoped<ITokenService, TokenService>()
             .AddSingleton<IPasswordService, PasswordService>();
 
-        public static IServiceCollection AddHealthCheckServices(this IServiceCollection services)
-        {
-            services.AddCustomHealthChecks();
-            return services;
-        }
-
         public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<AccessTokenOptions> accessTokenOptions, Action<RefreshTokenOptions> refreshTokenOptions)
         {
             services.Configure(accessTokenOptions);

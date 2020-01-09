@@ -21,7 +21,7 @@ namespace OAuth
         {
             services.AddHttpContextAccessor();
             services.AddMediatR();
-            services.AddHealthCheckServices();
+            services.AddCustomHealthChecks();
             services.AddJwtBearerAuthentication(
                 options => Configuration.GetSection(nameof(AccessTokenOptions)).Bind(options),
                 options => Configuration.GetSection(nameof(RefreshTokenOptions)).Bind(options));
