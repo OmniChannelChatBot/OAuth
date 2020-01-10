@@ -1,0 +1,16 @@
+﻿private async System.Threading.Tasks.Task<TObject> ReadContentAsync<TObject>(System.Net.Http.HttpContent content)
+{
+    using (var stream = await content.ReadAsStreamAsync().ConfigureAwait(false))
+    {
+        try
+        {
+            var result = await System.Text.Json.JsonSerializer.DeserializeAsync<TObject>(stream, _jsonSerializerOptions);
+            return result;
+        }
+        catch (System.Exception)
+        {
+            var str = await content.ReadAsStringAsync().ConfigureAwait(false);
+            throw new {{ ExceptionClass }}($"Failed to deserialize {typeof(TObject).FullName}", str);
+        }
+    }
+}

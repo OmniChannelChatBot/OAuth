@@ -1,0 +1,44 @@
+{% assign exceptions = "400:OAuth.Core.Exceptions.BadRequestException,405:OAuth.Core.Exceptions.MethodNotAllowedException,412:OAuth.Core.Exceptions.PreconditionFailedException,413:OAuth.Core.Exceptions.PayloadTooLargeException,415:OAuth.Core.Exceptions.UnsupportedMediaTypeException,451:OAuth.Core.Exceptions.UserException,500:OAuth.Core.Exceptions.ApiException,501:OAuth.Core.Exceptions.ApiException,502:OAuth.Core.Exceptions.BadGatewayException,503:OAuth.Core.Exceptions.ServiceUnavailableException,504:OAuth.Core.Exceptions.GatewayTimeoutException" | split: ','%}
+{% for exception in exceptions %}
+    {% assign exceptionObjects = exception | split: ':' %}
+    {% if response.StatusCode == exceptionObjects[0] -%}
+    {% assign exceptionClass = exceptionObjects[1] %}
+    {% endif -%}
+{% endfor %}
+{% if response.HasType -%}
+{%     if response.IsFile -%}
+{%         if response.IsSuccess -%}
+var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
+var fileResponse_ = new FileResponse((int)response_.StatusCode, responseStream_, {% if InjectHttpClient %}null{% else %}client_{% endif %}, response_); 
+client_ = null; response_ = null; // response and client are disposed by FileResponse
+return fileResponse_;
+{%         else -%}
+var objectResponse_ = await ReadContentAsync<{{ response.Type }}>(response_.Content).ConfigureAwait(false);
+throw new {{ exceptionClass }}("{{ response.ExceptionDescription }}", (int)response_.StatusCode, objectResponse_.Text, objectResponse_.Object);
+{%         endif -%}
+{%     else -%}
+var result = await ReadContentAsync<{{ response.Type }}>(response_.Content).ConfigureAwait(false);
+{%         if response.IsSuccess == false -%}
+throw new {{ exceptionClass }}(result.Detail, result);
+{%         else -%}
+return result;
+{%         endif -%}
+{%     endif -%}
+{% elseif response.IsSuccess -%}
+{%     if operation.HasResultType -%}
+{%         if operation.WrapResponse -%}
+return new {{ ResponseClass }}<{{ operation.UnwrappedResultType }}>((int)response_.StatusCode, default({{ operation.UnwrappedResultType }})); 
+{%         else -%}
+return default({{ operation.UnwrappedResultType }});
+{%         endif -%}
+{%     else -%}
+{%         if operation.WrapResponse -%}
+return new {{ ResponseClass }}((int)response_.StatusCode); 
+{%         else -%}
+return;
+{%         endif -%}
+{%     endif -%}
+{% else -%}{% comment %} implied: `if !response.HasType` so just read it as text {% endcomment %}
+var apiProblemDetails = await ReadContentAsync<{{ response.Type }}>(response_.Content).ConfigureAwait(false);
+throw new {{ exceptionClass }}(apiProblemDetails.Detail, apiProblemDetails);
+{% endif -%}
