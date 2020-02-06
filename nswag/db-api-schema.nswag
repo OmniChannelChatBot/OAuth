@@ -41,7 +41,7 @@
       "additionalNamespaceUsages": [
         "Microsoft.Extensions.Options",
         "OAuth.Core.Options",
-        "OAuth.Core.Exceptions"
+        "OCCBPackage.Exceptions"
       ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": true,

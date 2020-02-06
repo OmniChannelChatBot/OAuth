@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using OAuth.Core.Dtos;
 using OAuth.Core.Interfaces;
-using OAuth.Core.Options;
+using OCCBPackage.Options;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;

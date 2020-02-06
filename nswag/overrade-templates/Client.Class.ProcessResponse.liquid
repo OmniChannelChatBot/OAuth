@@ -1,4 +1,4 @@
-{% assign exceptions = "400:OAuth.Core.Exceptions.BadRequestException,405:OAuth.Core.Exceptions.MethodNotAllowedException,412:OAuth.Core.Exceptions.PreconditionFailedException,413:OAuth.Core.Exceptions.PayloadTooLargeException,415:OAuth.Core.Exceptions.UnsupportedMediaTypeException,451:OAuth.Core.Exceptions.UserException,500:OAuth.Core.Exceptions.ApiException,501:OAuth.Core.Exceptions.ApiException,502:OAuth.Core.Exceptions.BadGatewayException,503:OAuth.Core.Exceptions.ServiceUnavailableException,504:OAuth.Core.Exceptions.GatewayTimeoutException" | split: ','%}
+{% assign exceptions = "400:BadRequestException,405:MethodNotAllowedException,412:PreconditionFailedException,413:PayloadTooLargeException,415:UnsupportedMediaTypeException,451:UserException,500:ApiException,501:ApiException,502:BadGatewayException,503:ServiceUnavailableException,504:GatewayTimeoutException" | split: ','%}
 {% for exception in exceptions %}
     {% assign exceptionObjects = exception | split: ':' %}
     {% if response.StatusCode == exceptionObjects[0] -%}

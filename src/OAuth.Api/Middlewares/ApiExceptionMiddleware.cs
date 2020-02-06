@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using OAuth.Core.Exceptions;
+using OCCBPackage.Exceptions;
 using OCCBPackage.Mvc;
 using System;
 using System.Net.Mime;
@@ -50,6 +50,7 @@ namespace OAuth.Api.Middlewares
                 PreconditionFailedException _ => StatusCodes.Status412PreconditionFailed,
                 MethodNotAllowedException _ => StatusCodes.Status405MethodNotAllowed,
                 NotFoundException _ => StatusCodes.Status404NotFound,
+                AuthenticationException _ => StatusCodes.Status401Unauthorized,
                 BadRequestException _ => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError,
             };
