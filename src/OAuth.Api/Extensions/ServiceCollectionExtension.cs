@@ -51,42 +51,6 @@ namespace OAuth.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddJwtBearerAuthentication(this IServiceCollection services, Action<AccessTokenOptions> accessTokenOptions, Action<RefreshTokenOptions> refreshTokenOptions)
-        {
-            services.Configure(accessTokenOptions);
-            services.Configure(refreshTokenOptions);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                var accessTokenOptions = services
-                    .BuildServiceProvider()
-                    .GetRequiredService<IOptions<AccessTokenOptions>>();
-
-                x.ClaimsIssuer = accessTokenOptions.Value.Issuer;
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = accessTokenOptions.Value.GetTokenValidationParameters();
-                x.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        if (context.Exception is SecurityTokenExpiredException)
-                        {
-                            context.Response.Headers.Add("Token-Expired", "true");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
-            });
-
-            return services;
-        }
-
         private static IServiceCollection AddIntergationServices(this IServiceCollection services)
         {
             services.AddHttpClient<IDbApiServiceClient, DbApiServiceClient>();

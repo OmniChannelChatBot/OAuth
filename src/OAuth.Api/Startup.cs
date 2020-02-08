@@ -8,6 +8,7 @@ using OAuth.Api.Middlewares;
 using OAuth.Core;
 using OAuth.Core.Options;
 using OCCBPackage.Extensions;
+using OCCBPackage.Options;
 using OCCBPackage.Swagger.OperationFilters;
 
 namespace OAuth
