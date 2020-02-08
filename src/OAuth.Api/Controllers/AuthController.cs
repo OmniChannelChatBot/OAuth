@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Options;
 using OAuth.Api.Application.Commands;
 using OAuth.Api.Application.Models;
 using OCCBPackage.Mvc;
@@ -29,9 +30,13 @@ namespace OAuth.Api.Controllers
         [HttpPost("sign-in")]
         [SwaggerOperation(OperationId = nameof(SignInAsync))]
         [SwaggerResponse(StatusCodes.Status200OK, "Sign in", typeof(SignInCommandResponse))]
-        public async Task<IActionResult> SignInAsync([FromBody, BindRequired]SignInCommand command)
+        public async Task<IActionResult> SignInAsync([FromBody, BindRequired]SignInCommand command, [FromServices]IOptions<CookieOptions> cookieOptions)
         {
             var signInCommandResponse = await _mediator.Send(command);
+
+            Response.Cookies.Append("accessToken", signInCommandResponse.AccessToken, cookieOptions.Value);
+            Response.Cookies.Append("refreshToken", signInCommandResponse.RefreshToken, cookieOptions.Value);
+
             return Ok(signInCommandResponse);
         }
 
