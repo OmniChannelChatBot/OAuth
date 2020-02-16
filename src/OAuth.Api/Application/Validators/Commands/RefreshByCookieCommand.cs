@@ -23,13 +23,13 @@ namespace OAuth.Api.Application.Validators.Commands
             _tokenService = tokenService;
 
             RuleFor(command => command)
+                .Cascade(CascadeMode.StopOnFirstFailure)
                 .Must(_ =>
                 {
                     var accessToken = _httpContextAccessor.HttpContext.Request.Cookies[AccessTokenOptions.TokenName];
                     return _tokenService.VerifyExpiredAccessToken(accessToken);
                 })
-                .WithMessage("Invalid access token");
-            RuleFor(command => command)
+                .WithMessage("Invalid access token")
                 .MustAsync(async (_, cancellationToken) =>
                 {
                     var refreshToken = _httpContextAccessor.HttpContext.Request.Cookies[RefreshTokenOptions.TokenName];

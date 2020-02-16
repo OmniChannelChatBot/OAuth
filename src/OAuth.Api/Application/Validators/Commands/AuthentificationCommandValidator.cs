@@ -19,16 +19,14 @@ namespace OAuth.Api.Application.Validators.Commands
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .ChildRules(child =>
                 {
-                    child.RuleFor(command => command.Password)
-                        .NotNull()
-                        .WithMessage("Must not be null")
-                        .NotEmpty()
-                        .WithMessage("Should not be empty");
-                    child.RuleFor(command => command.Username)
-                        .NotNull()
-                        .WithMessage("Must not be null")
-                        .NotEmpty()
-                        .WithMessage("Should not be empty");
+                    child
+                        .RuleFor(command => command.Password)
+                            .NotEmpty()
+                            .WithMessage("Should not be empty");
+                    child
+                        .RuleFor(command => command.Username)
+                            .NotEmpty()
+                            .WithMessage("Should not be empty");
                 })
                 .MustAsync(async (command, cancellationToken) =>
                 {

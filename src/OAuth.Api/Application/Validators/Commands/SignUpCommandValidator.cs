@@ -14,43 +14,35 @@ namespace OAuth.Api.Application.Validators.Commands
         {
             _dbApiServiceClient = dbApiServiceClient;
 
-            RuleFor(command => command.FirstName)
-                .NotNull()
-                .WithMessage("Must not be null")
-                .NotEmpty()
-                .WithMessage("Should not be empty");
-            RuleFor(command => command.LastName)
-                 .NotNull()
-                 .WithMessage("Must not be null")
-                 .NotEmpty()
-                 .WithMessage("Should not be empty");
-            RuleFor(command => command.Username)
-                 .Cascade(CascadeMode.StopOnFirstFailure)
-                 .NotNull()
-                 .WithMessage("Must not be null")
-                 .NotEmpty()
-                 .WithMessage("Should not be empty")
-                 .MustAsync(async (username, cancellationToken) =>
-                 {
-                     var available = await _dbApiServiceClient.AvailabilityUsernameAsync(username, cancellationToken);
-                     return !available;
-                 })
-                 .WithMessage($"{nameof(SignUpCommand.Username)} is already in use");
-            RuleFor(command => command.Password)
-                 .NotNull()
-                 .WithMessage("Must not be null")
-                 .NotEmpty()
-                 .WithMessage("Should not be empty");
-            RuleFor(command => command.Email)
-                 .NotNull()
-                 .WithMessage("Must not be null")
-                 .NotEmpty()
-                 .WithMessage("Should not be empty")
-                 .EmailAddress(EmailValidationMode.AspNetCoreCompatible)
-                 .WithMessage("Do not match format");
-            RuleFor(command => command.Type)
-                 .IsInEnum()
-                 .WithMessage($"Must be one of {string.Join(',', Enum.GetNames(typeof(UserType)))}");
+            RuleFor(command => command)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .ChildRules(child =>
+                {
+                    RuleFor(command => command.FirstName)
+                            .NotEmpty()
+                            .WithMessage("Should not be empty");
+                    RuleFor(command => command.LastName)
+                         .NotEmpty()
+                         .WithMessage("Should not be empty");
+                    RuleFor(command => command.Username)
+                         .Cascade(CascadeMode.StopOnFirstFailure)
+                         .NotEmpty()
+                         .WithMessage("Should not be empty")
+                         .MustAsync(async (username, cancellationToken) =>
+                             !(await _dbApiServiceClient.AvailabilityUsernameAsync(username, cancellationToken)))
+                         .WithMessage($"{nameof(SignUpCommand.Username)} is already in use");
+                    RuleFor(command => command.Password)
+                         .NotEmpty()
+                         .WithMessage("Should not be empty");
+                    RuleFor(command => command.Email)
+                         .NotEmpty()
+                         .WithMessage("Should not be empty")
+                         .EmailAddress(EmailValidationMode.AspNetCoreCompatible)
+                         .WithMessage("Do not match format");
+                    RuleFor(command => command.Type)
+                         .IsInEnum()
+                         .WithMessage($"Must be one of {string.Join(',', Enum.GetNames(typeof(UserType)))}");
+                });
         }
     }
 }
