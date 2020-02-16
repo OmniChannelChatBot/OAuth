@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OAuth.Api.Application.Commands
 {
-    public class RefreshAccessTokenCommand : IRequest<RefreshAccessTokenCommandResponse>
+    public class RefreshCommand : IRequest<RefreshCommandResponse>
     {
         [Required]
         public string AccessToken { get; set; }

@@ -6,12 +6,12 @@ using System;
 
 namespace OAuth.Api.Application.Validators.Commands
 {
-    public class RefreshAccessTokenCommandValidator : AbstractValidator<RefreshAccessTokenCommand>
+    public class RefreshCommandValidator : AbstractValidator<RefreshCommand>
     {
         private readonly IDbApiServiceClient _dbApiServiceClient;
         private readonly ITokenService _tokenService;
 
-        public RefreshAccessTokenCommandValidator(IDbApiServiceClient dbApiServiceClient, ITokenService tokenService)
+        public RefreshCommandValidator(IDbApiServiceClient dbApiServiceClient, ITokenService tokenService)
         {
             _dbApiServiceClient = dbApiServiceClient;
             _tokenService = tokenService;
