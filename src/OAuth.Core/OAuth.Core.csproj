@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OCCBPackage" Version="0.0.6" />
+    <PackageReference Include="OCCBPackage" Version="0.0.7" />
   </ItemGroup>
 
 </Project>
