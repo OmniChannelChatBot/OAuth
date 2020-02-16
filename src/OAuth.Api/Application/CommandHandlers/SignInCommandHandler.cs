@@ -1,9 +1,11 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using OAuth.Api.Application.Commands;
 using OAuth.Api.Application.Models;
 using OAuth.Core.Interfaces;
 using OAuth.Infrastructure.Services;
+using OCCBPackage.Options;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,15 +16,18 @@ namespace OAuth.Api.Application.CommandHandlers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDbApiServiceClient _dbApiServiceClient;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
         public SignInCommandHandler(
             IHttpContextAccessor httpContextAccessor,
             IDbApiServiceClient dbApiServiceClient,
-            ITokenService tokenService)
+            ITokenService tokenService,
+            IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor;
             _dbApiServiceClient = dbApiServiceClient;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         public async Task<SignInCommandResponse> Handle(SignInCommand command, CancellationToken cancellationToken)
@@ -41,11 +46,12 @@ namespace OAuth.Api.Application.CommandHandlers
             var refreshTokenId = await _dbApiServiceClient.AddRefreshTokenAsync(addRefreshTokenCommand, cancellationToken);
             var accessToken = _tokenService.GenerateAccessToken(user.Id, user.Username, refreshTokenId);
 
-            return new SignInCommandResponse
-            {
-                AccessToken = accessToken.Token,
-                RefreshToken = refreshToken.Token
-            };
+            var result = _mapper.Map<SignInCommandResponse>(user);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(AccessTokenOptions.TokenName, accessToken.Token);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(RefreshTokenOptions.TokenName, refreshToken.Token);
+
+            return result;
         }
     }
 }

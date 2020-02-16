@@ -33,7 +33,7 @@ namespace OAuth.Api.Application.Validators.Commands
                 .MustAsync(async (refreshToken, cancellationToken) =>
                 {
                     var result = await _dbApiServiceClient.FindRefreshTokenByTokenAsync(refreshToken, cancellationToken);
-                    return result != default && result.Token == refreshToken && result.Expires >= DateTimeOffset.UtcNow;
+                    return result?.Token == refreshToken && result.Expires >= DateTimeOffset.UtcNow;
                 })
                 .WithMessage("Token not found or expired");
         }

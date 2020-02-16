@@ -32,7 +32,7 @@ namespace OAuth.Api.Application.Validators.Commands
                 })
                 .MustAsync(async (command, cancellationToken) =>
                 {
-                    // TODO: Пожалуй нужен cache, так еще есть вызов дальше в handler
+                    // TODO: Пожалуй нужен распределенный кеш, так еще есть вызов дальше в handler
                     var user = await _dbApiServiceClient.FindUserByUsernameAsync(command.Username, cancellationToken);
                     return user != default && _passwordService.Verify(command.Password, user.PasswordHash, user.PasswordSalt);
                 })

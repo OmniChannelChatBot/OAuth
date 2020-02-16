@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OAuth.Api.Application.CommandHandlers
 {
-    public class SignUpCommandHandler : IRequestHandler<SignUpCommand, int>
+    public class SignUpCommandHandler : AsyncRequestHandler<SignUpCommand>
     {
         private readonly IDbApiServiceClient _dbApiServiceClient;
         private readonly IPasswordService _passwordService;
@@ -21,7 +21,7 @@ namespace OAuth.Api.Application.CommandHandlers
             _mapper = mapper;
         }
 
-        public Task<int> Handle(SignUpCommand command, CancellationToken cancellationToken)
+        protected override Task Handle(SignUpCommand command, CancellationToken cancellationToken)
         {
             _passwordService.CreateHash(command.Password, out var hash, out var salt);
 

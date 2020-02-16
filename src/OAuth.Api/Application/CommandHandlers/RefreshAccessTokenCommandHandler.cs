@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using OAuth.Api.Application.Commands;
 using OAuth.Api.Application.Models;
 using OAuth.Core.Interfaces;
 using OAuth.Infrastructure.Services;
+using OCCBPackage.Options;
 using System;
 using System.Security.Claims;
 using System.Threading;
@@ -30,7 +30,7 @@ namespace OAuth.Api.Application.CommandHandlers
 
         public async Task<RefreshAccessTokenCommandResponse> Handle(RefreshAccessTokenCommand command, CancellationToken cancellationToken)
         {
-            var claimsPrincipal = _tokenService.GetClaimsPrincipalByExpiredAccessToken(command.AccessToken) ??
+            var claimsPrincipal = _tokenService.ValidateExpiredAccessToken(command.AccessToken) ??
                 throw new InvalidOperationException($"{nameof(ClaimsPrincipal)} is null");
 
             var username = claimsPrincipal.Identity.Name;
@@ -60,6 +60,9 @@ namespace OAuth.Api.Application.CommandHandlers
             await Task.WhenAll(addRefreshTokenTask, updateRefreshTokenTask);
 
             var accessToken = _tokenService.GenerateAccessToken(userId, username, await addRefreshTokenTask);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(AccessTokenOptions.TokenName, accessToken.Token);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(RefreshTokenOptions.TokenName, refreshToken.Token);
 
             return new RefreshAccessTokenCommandResponse
             {

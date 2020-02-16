@@ -20,7 +20,7 @@ namespace OAuth.Api.Controllers
 
         [HttpPost("sign-up")]
         [SwaggerOperation(OperationId = nameof(SignUpAsync))]
-        [SwaggerResponse(StatusCodes.Status200OK, "Sign up", typeof(int))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Sign up")]
         public async Task<IActionResult> SignUpAsync([FromBody, BindRequired]SignUpCommand command)
         {
             var userId = await _mediator.Send(command);
@@ -33,10 +33,6 @@ namespace OAuth.Api.Controllers
         public async Task<IActionResult> SignInAsync([FromBody, BindRequired]SignInCommand command, [FromServices]IOptions<CookieOptions> cookieOptions)
         {
             var signInCommandResponse = await _mediator.Send(command);
-
-            Response.Cookies.Append("accessToken", signInCommandResponse.AccessToken, cookieOptions.Value);
-            Response.Cookies.Append("refreshToken", signInCommandResponse.RefreshToken, cookieOptions.Value);
-
             return Ok(signInCommandResponse);
         }
 

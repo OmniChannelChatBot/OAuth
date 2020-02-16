@@ -85,7 +85,7 @@ namespace OAuth.Core.Services
             }
         }
 
-        public ClaimsPrincipal GetClaimsPrincipalByExpiredAccessToken(string accessToken) =>
+        public ClaimsPrincipal ValidateExpiredAccessToken(string accessToken) =>
             _jwtSecurityTokenHandler.ValidateToken(
                 accessToken,
                 _accessTokenOptions.GetTokenValidationParameters(validateLifetime: false),

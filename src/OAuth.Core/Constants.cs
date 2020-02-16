@@ -11,7 +11,5 @@
         {
             public const string ApiAccess = "api_access";
         }
-
-        public static string ClientOriginPolicy = nameof(ClientOriginPolicy);
     }
 }

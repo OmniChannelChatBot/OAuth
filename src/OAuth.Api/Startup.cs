@@ -1,11 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OAuth.Api.Extensions;
 using OAuth.Api.Middlewares;
-using OAuth.Core;
 using OAuth.Core.Options;
 using OCCBPackage.Extensions;
 using OCCBPackage.Options;
@@ -24,16 +22,15 @@ namespace OAuth
         {
             services.AddHttpContextAccessor();
             services.AddMediatR();
+            services.AddAutoMapper(typeof(Startup));
             services.AddCustomHealthChecks();
             services.AddJwtBearerAuthentication(
                 options => Configuration.GetSection(nameof(AccessTokenOptions)).Bind(options),
                 options => Configuration.GetSection(nameof(RefreshTokenOptions)).Bind(options));
-            services.AddAutoMapper(typeof(Startup));
-            services.AddApplicationServices(
-                options => Configuration.GetSection(nameof(DBApiOptions)).Bind(options),
-                options => Configuration.GetSection(nameof(CookieOptions)).Bind(options));
+            services.AddApplicationServices(options => Configuration.GetSection(nameof(DBApiOptions)).Bind(options));
             services.AddApiServices();
-            services.AddCorsClients(options => Configuration.GetSection(nameof(ClientOriginPolicyOptions)).Bind(options));
+            services.AddCorsPolicy(options => Configuration.GetSection(nameof(CorsPolicyOptions)).Bind(options));
+            services.AddCookiePolicy(options => Configuration.GetSection(nameof(CookiePolicyOptions)).Bind(options));
             services.AddCustomSwagger(o =>
             {
                 o.AddBearerSecurityDefinition();
@@ -45,8 +42,9 @@ namespace OAuth
         public void Configure(IApplicationBuilder app)
         {
             app.UseMiddleware<ApiExceptionMiddleware>();
+            app.UseCookiePolicy();
             app.UseRouting();
-            app.UseCors(Constants.ClientOriginPolicy);
+            app.UseCors(CorsPolicyOptions.CorsPolicy);
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCustomHealthChecks();
