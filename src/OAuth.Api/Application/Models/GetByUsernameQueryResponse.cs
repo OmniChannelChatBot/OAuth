@@ -2,7 +2,7 @@
 
 namespace OAuth.Api.Application.Models
 {
-    public class GetByUsernameQueryResponse
+    public class GetUserQueryResponse
     {
         [Required]
         public int UserId { get; set; }

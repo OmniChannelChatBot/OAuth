@@ -4,11 +4,11 @@ using OAuth.Infrastructure.Services;
 
 namespace OAuth.Api.Application.Mappings
 {
-    public class FindUserByUsernameQueryResponse_GetByUsernameQueryResponse_Profile : Profile
+    public class GetUserByIdQueryResponse_GetByUsernameQueryResponse_Profile : Profile
     {
-        public FindUserByUsernameQueryResponse_GetByUsernameQueryResponse_Profile()
+        public GetUserByIdQueryResponse_GetByUsernameQueryResponse_Profile()
         {
-            CreateMap<FindUserByUsernameQueryResponse, GetByUsernameQueryResponse>()
+            CreateMap<GetUserByIdQueryResponse, GetUserQueryResponse>()
                 .ForMember(d => d.UserId, o => o.MapFrom(m => m.Id));
         }
     }
