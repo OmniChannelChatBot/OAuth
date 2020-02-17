@@ -1,21 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using OAuth.Api.Application.Commands;
+using OAuth.Api.Application.Models;
 using OAuth.Core.Interfaces;
 using OAuth.Infrastructure.Services;
-using OCCBPackage.Options;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace OAuth.Api.Application.CommandHandlers
 {
-    public class SignInCommandHandler : AsyncRequestHandler<SignInCommand>
+    public class AuthentificationCommandHandler : IRequestHandler<AuthentificationCommand, AuthentificationCommandResponse>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDbApiServiceClient _dbApiServiceClient;
         private readonly ITokenService _tokenService;
 
-        public SignInCommandHandler(
+        public AuthentificationCommandHandler(
             IHttpContextAccessor httpContextAccessor,
             IDbApiServiceClient dbApiServiceClient,
             ITokenService tokenService)
@@ -25,7 +25,7 @@ namespace OAuth.Api.Application.CommandHandlers
             _tokenService = tokenService;
         }
 
-        protected override async Task Handle(SignInCommand command, CancellationToken cancellationToken)
+        public async Task<AuthentificationCommandResponse> Handle(AuthentificationCommand command, CancellationToken cancellationToken)
         {
             var user = await _dbApiServiceClient.FindUserByUsernameAsync(command.Username, cancellationToken);
             var refreshToken = _tokenService.GenerateRefreshToken();
@@ -41,8 +41,11 @@ namespace OAuth.Api.Application.CommandHandlers
             var refreshTokenId = await _dbApiServiceClient.AddRefreshTokenAsync(addRefreshTokenCommand, cancellationToken);
             var accessToken = _tokenService.GenerateAccessToken(user.Id, user.Username, refreshTokenId);
 
-            _httpContextAccessor.HttpContext.Response.Cookies.Append(AccessTokenOptions.TokenName, accessToken.Token);
-            _httpContextAccessor.HttpContext.Response.Cookies.Append(RefreshTokenOptions.TokenName, refreshToken.Token);
+            return new AuthentificationCommandResponse
+            {
+                AccessToken = accessToken.Token,
+                RefreshToken = refreshToken.Token
+            };
         }
     }
 }

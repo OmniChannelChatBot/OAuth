@@ -1,11 +1,12 @@
-﻿using MediatR;
-using OAuth.Api.Application.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OAuth.Api.Application.Commands
+namespace OAuth.Api.Application.Models
 {
-    public class SignUpCommand : IRequest
+    public class GetByUsernameQueryResponse
     {
+        [Required]
+        public int UserId { get; set; }
+
         [Required]
         public string Username { get; set; }
 
@@ -14,9 +15,6 @@ namespace OAuth.Api.Application.Commands
 
         [Required]
         public string LastName { get; set; }
-
-        [Required]
-        public string Password { get; set; }
 
         [Required]
         public string Email { get; set; }

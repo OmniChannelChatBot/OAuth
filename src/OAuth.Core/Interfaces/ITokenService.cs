@@ -11,6 +11,6 @@ namespace OAuth.Core.Interfaces
 
         bool VerifyExpiredAccessToken(string accessToken);
 
-        ClaimsPrincipal GetClaimsPrincipalByExpiredAccessToken(string accessToken);
+        ClaimsPrincipal ValidateExpiredAccessToken(string accessToken);
     }
 }

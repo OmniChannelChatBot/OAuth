@@ -22,13 +22,15 @@ namespace OAuth
         {
             services.AddHttpContextAccessor();
             services.AddMediatR();
+            services.AddAutoMapper(typeof(Startup));
             services.AddCustomHealthChecks();
             services.AddJwtBearerAuthentication(
                 options => Configuration.GetSection(nameof(AccessTokenOptions)).Bind(options),
                 options => Configuration.GetSection(nameof(RefreshTokenOptions)).Bind(options));
-            services.AddAutoMapper(typeof(Startup));
             services.AddApplicationServices(options => Configuration.GetSection(nameof(DBApiOptions)).Bind(options));
             services.AddApiServices();
+            services.AddCorsPolicy(options => Configuration.GetSection(nameof(CorsPolicyOptions)).Bind(options));
+            services.AddCookiePolicy(options => Configuration.GetSection(nameof(CookiePolicyOptions)).Bind(options));
             services.AddCustomSwagger(o =>
             {
                 o.AddBearerSecurityDefinition();
@@ -40,7 +42,9 @@ namespace OAuth
         public void Configure(IApplicationBuilder app)
         {
             app.UseMiddleware<ApiExceptionMiddleware>();
+            app.UseCookiePolicy();
             app.UseRouting();
+            app.UseCors(CorsPolicyOptions.CorsPolicy);
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCustomHealthChecks();

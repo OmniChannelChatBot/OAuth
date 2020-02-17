@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://localhost:5002/api-doc/DB/swagger.json",
+      "url": "https://localhost:5002/api-doc/DBApi/swagger.json",
       "output": null
     }
   },

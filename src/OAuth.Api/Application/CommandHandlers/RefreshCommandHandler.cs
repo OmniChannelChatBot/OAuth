@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using OAuth.Api.Application.Commands;
 using OAuth.Api.Application.Models;
@@ -12,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace OAuth.Api.Application.CommandHandlers
 {
-    public class RefreshAccessTokenCommandHandler : IRequestHandler<RefreshAccessTokenCommand, RefreshAccessTokenCommandResponse>
+    public class RefreshCommandHandler : IRequestHandler<RefreshCommand, RefreshCommandResponse>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDbApiServiceClient _dbApiServiceClient;
         private readonly ITokenService _tokenService;
 
-        public RefreshAccessTokenCommandHandler(
+        public RefreshCommandHandler(
             IHttpContextAccessor httpContextAccessor,
             IDbApiServiceClient dbApiServiceClient,
             ITokenService tokenService)
@@ -28,9 +27,9 @@ namespace OAuth.Api.Application.CommandHandlers
             _tokenService = tokenService;
         }
 
-        public async Task<RefreshAccessTokenCommandResponse> Handle(RefreshAccessTokenCommand command, CancellationToken cancellationToken)
+        public async Task<RefreshCommandResponse> Handle(RefreshCommand command, CancellationToken cancellationToken)
         {
-            var claimsPrincipal = _tokenService.GetClaimsPrincipalByExpiredAccessToken(command.AccessToken) ??
+            var claimsPrincipal = _tokenService.ValidateExpiredAccessToken(command.AccessToken) ??
                 throw new InvalidOperationException($"{nameof(ClaimsPrincipal)} is null");
 
             var username = claimsPrincipal.Identity.Name;
@@ -61,7 +60,7 @@ namespace OAuth.Api.Application.CommandHandlers
 
             var accessToken = _tokenService.GenerateAccessToken(userId, username, await addRefreshTokenTask);
 
-            return new RefreshAccessTokenCommandResponse
+            return new RefreshCommandResponse
             {
                 AccessToken = accessToken.Token,
                 RefreshToken = refreshToken.Token

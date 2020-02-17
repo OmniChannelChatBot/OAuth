@@ -4,9 +4,9 @@ using OAuth.Infrastructure.Services;
 
 namespace OAuth.Api.Application.Mappings
 {
-    public class DB_SignUpCommand_AddUserCommand_Profile : Profile
+    public class SignUpCommand_AddUserCommand_Profile : Profile
     {
-        public DB_SignUpCommand_AddUserCommand_Profile()
+        public SignUpCommand_AddUserCommand_Profile()
         {
             CreateMap<SignUpCommand, AddUserCommand>()
                 .ForMember(d => d.Type, o => o.MapFrom(m => (int)m.Type))

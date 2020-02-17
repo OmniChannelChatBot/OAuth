@@ -5,12 +5,12 @@ using OAuth.Infrastructure.Services;
 
 namespace OAuth.Api.Application.Validators.Commands
 {
-    public class SignInCommandValidator : AbstractValidator<SignInCommand>
+    public class AuthentificationCommandValidator : AbstractValidator<AuthentificationCommand>
     {
         private readonly IDbApiServiceClient _dbApiServiceClient;
         private readonly IPasswordService _passwordService;
 
-        public SignInCommandValidator(IDbApiServiceClient dbApiServiceClient, IPasswordService passwordService)
+        public AuthentificationCommandValidator(IDbApiServiceClient dbApiServiceClient, IPasswordService passwordService)
         {
             _dbApiServiceClient = dbApiServiceClient;
             _passwordService = passwordService;

@@ -2,7 +2,7 @@
 
 namespace OAuth.Api.Application.Models
 {
-    public class RefreshAccessTokenCommandResponse
+    public class AuthentificationCommandResponse
     {
         [Required]
         public string AccessToken { get; set; }

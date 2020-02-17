@@ -1,25 +1,20 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using OAuth.Core.Interfaces;
 using OAuth.Core.Options;
 using OAuth.Core.Services;
 using OAuth.Infrastructure.Services;
-using OCCBPackage.Extensions;
 using System;
-using System.Threading.Tasks;
 
 namespace OAuth.Api.Extensions
 {
-    internal static class ServiceCollectionExtension
+    internal static class ServiceCollectionExtensions
     {
         private static readonly string _namespaceApplication = $"{nameof(OAuth)}.{nameof(Api)}.{nameof(Application)}";
 
-        public static void AddApplicationServices(this IServiceCollection services, Action<DBApiOptions> options) => services
-            .Configure(options)
+        public static void AddApplicationServices(this IServiceCollection services, Action<DBApiOptions> actionDBbApiOptions) => services
+            .Configure(actionDBbApiOptions)
             .AddMediatRHandlers()
             .AddFluentValidators()
             .AddIntergationServices()
