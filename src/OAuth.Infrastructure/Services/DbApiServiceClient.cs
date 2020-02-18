@@ -1417,7 +1417,7 @@ namespace OAuth.Infrastructure.Services
                         if (status_ == 404) 
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
-                            throw new BadRequestException(result.Detail, result);
+                            throw new NotFoundException(result.Detail, result);
                         }
                         else
                         if (status_ == 504) 
