@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OAuth.Api.Application.Models;
 using OAuth.Api.Application.Queries;
 using OCCBPackage.Mvc;
@@ -19,12 +18,13 @@ namespace OAuth.Api.Controllers
         public UsersController(IMediator mediator) =>
             _mediator = mediator;
 
-        [HttpGet("username/{Username}")]
-        [SwaggerOperation(OperationId = nameof(GetByUsernameAsync))]
-        [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetByUsernameQueryResponse))]
+        [HttpGet]
+        [SwaggerOperation(OperationId = nameof(GetUserAsync))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetUserQueryResponse))]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Not found", typeof(ApiProblemDetails))]
-        public async Task<IActionResult> GetByUsernameAsync([FromRoute, BindRequired]GetByUsernameQuery query)
+        public async Task<IActionResult> GetUserAsync()
         {
+            var query = new GetUserQuery();
             var response = await _mediator.Send(query);
             return Ok(response);
         }

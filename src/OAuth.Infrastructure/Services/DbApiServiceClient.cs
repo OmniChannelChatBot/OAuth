@@ -1414,6 +1414,12 @@ namespace OAuth.Infrastructure.Services
                             return result;
                         }
                         else
+                        if (status_ == 404) 
+                        {
+                            var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
+                            throw new BadRequestException(result.Detail, result);
+                        }
+                        else
                         if (status_ == 504) 
                         {
                             var result = await ReadContentAsync<ApiProblemDetails>(response_.Content).ConfigureAwait(false);
@@ -2085,6 +2091,9 @@ namespace OAuth.Infrastructure.Services
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Email { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        public int Type { get; set; }
     
     
     }
